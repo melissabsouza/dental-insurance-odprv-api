@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Clínicas</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="p-6">
+<div th:insert="~{fragments/header :: header}">
+    MENU NO HEADER
+</div>
+<div>
+    <h1 class="text-xl font-black text-black text-center mb-4">Lista de Clínicas</h1>
+
+    <div class="text-center mt-8">
+        <a class="text-black mb-4" th:href="@{/templates/clinicas/novo}" >Nova Clínica</a>
+    </div>
+
+    <div class="p-6">
+        <table class="w-full border-collapse">
+            <thead>
+            <tr class="bg-violet-600 text-white">
+                <th class="p-3 text-left">CNPJ</th>
+                <th class="p-3 text-left">Nome</th>
+                <th class="p-3 text-left">Usuário ID</th>
+                <th class="p-3 text-left">Endereço ID</th>
+                <th class="p-3 text-left">Telefone ID</th>
+                <th class="p-3 text-left">Ações</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr class="border-b" th:each="clinica : ${clinicas}">
+                <td class="p-3 text-gray" th:text="${clinica.cnpj}">cnpj</td>
+                <td class="p-3" th:text="${clinica.nome}">nome</td>
+                <td class="p-3" th:text="${clinica.usuario}">usuario</td>
+                <td class="p-3" th:text="${clinica.endereco}">endereco</td>
+                <td class="p-3" th:text="${clinica.telefone}">telefone</td>
+
+
+                <td class="p-3">
+                    <a class="text-blue-600 hover:underline" th:href="@{/templates/clinicas/editar/{id}(id=${clinica.cnpj})}">Editar</a>
+                    <a class="text-blue-600 hover:underline" th:href="@{/templates/clinicas/deletar/{id}(id=${clinica.cnpj})}">Deletar</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+</body>
+</html>
