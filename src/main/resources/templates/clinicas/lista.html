@@ -13,7 +13,7 @@
     <h1 class="text-xl font-black text-black text-center mb-4">Lista de Clínicas</h1>
 
     <div class="text-center mt-8">
-        <a class="text-black mb-4" th:href="@{/templates/clinicas/novo}" >Nova Clínica</a>
+        <a class="text-black mb-4" th:href="@{/clinicas/novo}" >Nova Clínica</a>
     </div>
 
     <div class="p-6">
@@ -39,8 +39,8 @@
 
 
                 <td class="p-3">
-                    <a class="text-blue-600 hover:underline" th:href="@{/templates/clinicas/editar/{id}(id=${clinica.cnpj})}">Editar</a>
-                    <a class="text-blue-600 hover:underline" th:href="@{/templates/clinicas/deletar/{id}(id=${clinica.cnpj})}">Deletar</a>
+                    <a class="text-blue-600 hover:underline" th:href="@{/clinicas/editar/{id}(id=${clinica.cnpj})}">Editar</a>
+                    <a class="text-blue-600 hover:underline" th:href="@{/clinicas/deletar/{id}(id=${clinica.cnpj})}">Deletar</a>
                 </td>
             </tr>
             </tbody>
