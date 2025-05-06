@@ -11,7 +11,11 @@ import java.util.Date;
 @Entity
 @Table(name = "T_CHALLENGE_PACIENTE")
 public class Paciente {
+
     @Id
+    @Column(name = "id_paciente", unique = true, nullable = false)
+    private Long id;
+
     @Column(name = "cpf_paciente", unique = true, nullable = false)
     private String cpf;
     @Column(name = "nome_paciente", length = 100, nullable = false)

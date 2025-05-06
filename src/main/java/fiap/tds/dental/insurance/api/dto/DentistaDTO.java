@@ -7,6 +7,7 @@ import java.util.Date;
 
 @Data
 public class DentistaDTO {
+    private Long id;
     private String cpf;
     private String nome;
     private String cro;

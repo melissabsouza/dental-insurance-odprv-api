@@ -5,6 +5,7 @@ import lombok.Data;
 import java.util.Date;
 @Data
 public class PacienteDTO {
+    private Long id;
     private String cpf;
     private String nome;
     private Date dataNascimento;
