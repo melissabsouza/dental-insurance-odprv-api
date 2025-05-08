@@ -3,6 +3,7 @@ package fiap.tds.dental.insurance.api.service;
 
 import fiap.tds.dental.insurance.api.dto.UsuarioDTO;
 import fiap.tds.dental.insurance.api.entity.Usuario;
+import fiap.tds.dental.insurance.api.enums.StatusUsuario;
 import fiap.tds.dental.insurance.api.repository.UsuarioRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,7 +61,7 @@ public class UsuarioService {
     }
 
 
-    private static Usuario toEntity(UsuarioDTO usuarioDTO) {
+    public static Usuario toEntity(UsuarioDTO usuarioDTO) {
         Usuario usuario = new Usuario();
         usuario.setId(usuarioDTO.getId());
         usuario.setEmail(usuarioDTO.getEmail());
@@ -69,7 +70,7 @@ public class UsuarioService {
         return usuario;
     }
 
-    private static UsuarioDTO toDto(Usuario usuario) {
+    public static UsuarioDTO toDto(Usuario usuario) {
         UsuarioDTO usuarioDTO = new UsuarioDTO();
         usuarioDTO.setId(usuario.getId());
         usuarioDTO.setEmail(usuario.getEmail());
@@ -77,4 +78,12 @@ public class UsuarioService {
         usuarioDTO.setStatus(usuario.getStatus());
         return usuarioDTO;
     }
+
+//    public void atualizarStatusUsuario(Long id, StatusUsuario statusNovo) {
+//        Usuario usuario = usuarioRepository.findById(id)
+//                .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
+//
+//        usuario.setStatus(statusNovo);
+//        usuarioRepository.save(usuario);
+//    }
 }

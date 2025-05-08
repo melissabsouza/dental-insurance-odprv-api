@@ -58,7 +58,7 @@ public class EnderecoService {
 
 
 
-    private static Endereco toEntity(EnderecoDTO enderecoDTO) {
+    public static Endereco toEntity(EnderecoDTO enderecoDTO) {
         Endereco endereco = new Endereco();
         endereco.setId(enderecoDTO.getId());
         endereco.setNumero(enderecoDTO.getNumero());
@@ -71,7 +71,7 @@ public class EnderecoService {
         return endereco;
     }
 
-    private static EnderecoDTO toDto(Endereco endereco) {
+    public static EnderecoDTO toDto(Endereco endereco) {
         EnderecoDTO enderecoDTO = new EnderecoDTO();
         enderecoDTO.setId(endereco.getId());
         enderecoDTO.setNumero(endereco.getNumero());

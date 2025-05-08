@@ -2,6 +2,8 @@ package fiap.tds.dental.insurance.api.dto;
 
 
 import fiap.tds.dental.insurance.api.enums.StatusUsuario;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -19,5 +21,6 @@ public class UsuarioDTO {
     @Size(min = 5, message = "A senha deve ter pelo menos 5 caracteres")
     private String senha;
 
-    private StatusUsuario status = StatusUsuario.ATIVO;
+
+    private StatusUsuario status;
 }

@@ -30,5 +30,5 @@ public class Usuario {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status_usuario", nullable = false)
-    private StatusUsuario status = StatusUsuario.ATIVO;
+    private StatusUsuario status;
 }

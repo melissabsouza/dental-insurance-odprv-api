@@ -55,7 +55,7 @@ public class TelefoneService {
         throw new RuntimeException("id não encontrado");
     }
 
-    private static Telefone toEntity(TelefoneDTO telefoneDTO){
+    public static Telefone toEntity(TelefoneDTO telefoneDTO){
         Telefone telefone = new Telefone();
         telefone.setId(telefoneDTO.getId());
         telefone.setNumero(telefoneDTO.getNumero());
@@ -63,7 +63,7 @@ public class TelefoneService {
         return telefone;
     }
 
-    private static TelefoneDTO toDto(Telefone telefone){
+    public static TelefoneDTO toDto(Telefone telefone){
         TelefoneDTO telefoneDTO = new TelefoneDTO();
         telefoneDTO.setId(telefone.getId());
         telefoneDTO.setNumero(telefone.getNumero());

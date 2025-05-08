@@ -17,33 +17,80 @@
     </div>
 
     <div class="flex items-center">
-        <form th:action="@{/clinicas}" method="post" th:object="${clinica}">
+        <form th:action="@{${clinica.id == null ? '/clinicas' : '/clinicas/editar/' + clinica.id}}"
+              th:object="${clinica}" method="post">
 
-            <label class="block text-black font-medium mb-2" for="cnpj">CNPJ</label>
-            <input class="w-96 p-3 border border-gray-300 rounded-lg" th:field="*{cnpj}" type="text" id="cnpj" name="cnpj" placeholder="00000000/0000-00">
-            <li th:each="err : ${#fields.errors('cnpj')}" th:text="${err}">ERRO</li>
+            <!-- Campo para CNPJ -->
+            <label for="cnpj">CNPJ:</label>
+            <input type="text" id="cnpj" th:field="*{cnpj}" required/>
+            <br>
 
-            <label class="block text-black font-medium mb-2" for="nome">Nome</label>
-            <input class="w-96 p-3 border border-gray-300 rounded-lg" th:field="*{nome}" type="text" id="nome" name="nome" placeholder="Nome">
-            <li th:each="err : ${#fields.errors('nome')}" th:text="${err}">ERRO</li>
+            <!-- Campo para Nome -->
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" th:field="*{nome}" required/>
+            <br>
 
-            <label class="block text-black font-medium mb-2" for="usuario">Usuário</label>
-            <input class="w-96 p-3 border border-gray-300 rounded-lg" th:field="*{usuario}" type="number" id="usuario" name="usuario" placeholder="ID">
-            <li th:each="err : ${#fields.errors('usuario')}" th:text="${err}">ERRO</li>
+            <!-- Campo para Endereço -->
+            <h3>Endereço</h3>
+            <label for="rua">Rua:</label>
+            <input type="text" id="rua" th:field="*{endereco.rua}" required/>
+            <br>
 
-            <label class="block text-black font-medium mb-2" for="endereco">Endereço</label>
-            <input class="w-96 p-3 border border-gray-300 rounded-lg" th:field="*{endereco}" type="number" id="endereco" name="endereco" placeholder="ID">
-            <li th:each="err : ${#fields.errors('endereco')}" th:text="${err}">ERRO</li>
+            <label for="numero">Número:</label>
+            <input type="text" id="numero" th:field="*{endereco.numero}" required/>
+            <br>
 
-            <label class="block text-black font-medium mb-2" for="telefone">Telefone</label>
-            <input class="w-96 p-3 border border-gray-300 rounded-lg" th:field="*{telefone}" type="number" id="telefone" name="telefone" placeholder="telefone">
-            <li th:each="err : ${#fields.errors('telefone')}" th:text="${err}">ERRO</li>
+            <label for="bairro">Bairro:</label>
+            <input type="text" id="bairro" th:field="*{endereco.bairro}" required/>
+            <br>
 
+            <label for="cep">CEP:</label>
+            <input type="text" id="cep" th:field="*{endereco.cep}" required/>
+            <br>
 
+            <label for="cidade">Cidade:</label>
+            <input type="text" id="cidade" th:field="*{endereco.cidade}" required/>
+            <br>
 
-            <div class="flex justify-center items-center">
-                <button class="mt-3 bg-violet-600 text-white rounded px-10 py-2 hover:bg-violet-300" type="submit">Salvar</button>
-            </div>
+            <label for="estado">Estado:</label>
+            <input type="text" id="estado" th:field="*{endereco.estado}" required/>
+            <br>
+
+            <label for="complemento">Complemento:</label>
+            <input type="text" id="complemento" th:field="*{endereco.complemento}"/>
+            <br>
+
+            <!-- Campo para Usuario -->
+            <h3>Usuário</h3>
+            <label for="email">Email:</label>
+            <input type="email" id="email" th:field="*{usuario.email}" required/>
+            <br>
+
+            <label for="senha">Senha:</label>
+            <input type="password" id="senha" th:field="*{usuario.senha}" required/>
+            <br>
+
+            <label for="status">Status:</label>
+            <select th:field="*{usuario.status}">
+                <option th:value="null" disabled selected>Selecione o status</option>
+                <option th:value="ATIVO" th:text="Ativo">Ativo</option>
+                <option th:value="INATIVO" th:text="Inativo">Inativo</option>
+            </select>
+            <br>
+
+            <!-- Campo para Telefone -->
+            <h3>Telefone</h3>
+            <label for="tipo">Tipo:</label>
+            <input type="text" id="tipo" th:field="*{telefone.tipo}" required/>
+            <br>
+
+            <label for="numeroTelefone">Número:</label>
+            <input type="text" id="numeroTelefone" th:field="*{telefone.numero}" required/>
+            <br>
+
+            <!-- Botão para Submeter -->
+            <button type="submit">Salvar</button>
+
         </form>
 
     </div>

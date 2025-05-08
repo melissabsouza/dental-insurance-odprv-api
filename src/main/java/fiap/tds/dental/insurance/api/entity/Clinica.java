@@ -15,6 +15,7 @@ import lombok.ToString;
 public class Clinica {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_clinica", unique = true, nullable = false)
     private Long id;
 
@@ -29,17 +30,17 @@ public class Clinica {
     @Column(name = "nome_clinica", length = 100, nullable = false)
     private String nome;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_usuario", referencedColumnName = "id_usuario", nullable = false)
     @NotNull(message = "O id do usuário não pode ser nulo")
     private Usuario usuario;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_endereco", referencedColumnName = "id_endereco", nullable = false)
     @NotNull(message = "O id do endereço não pode ser nulo")
     private Endereco endereco;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_telefone", referencedColumnName = "id_telefone")
     @NotNull(message = "O id do telefone não pode ser nulo")
     private Telefone telefone;
