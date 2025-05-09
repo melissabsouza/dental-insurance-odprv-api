@@ -58,18 +58,35 @@ public class EnderecoService {
 
 
 
-    public static Endereco toEntity(EnderecoDTO enderecoDTO) {
-        Endereco endereco = new Endereco();
-        endereco.setId(enderecoDTO.getId());
-        endereco.setNumero(enderecoDTO.getNumero());
-        endereco.setBairro(enderecoDTO.getBairro());
-        endereco.setCep(enderecoDTO.getCep());
-        endereco.setCidade(enderecoDTO.getCidade());
-        endereco.setEstado(enderecoDTO.getEstado());
-        endereco.setComplemento(enderecoDTO.getComplemento());
-        endereco.setRua(enderecoDTO.getRua());
-        return endereco;
+    public Endereco toEntity(EnderecoDTO dto) {
+        if (dto.getId() != null) {
+            Endereco existente = enderecoRepository.findById(dto.getId())
+                    .orElseThrow(() -> new RuntimeException("Endereço não encontrado"));
+
+            // Atualiza os campos existentes
+            existente.setRua(dto.getRua());
+            existente.setNumero(dto.getNumero());
+            existente.setCep(dto.getCep());
+            existente.setBairro(dto.getBairro());
+            existente.setCidade(dto.getCidade());
+            existente.setEstado(dto.getEstado());
+            existente.setComplemento(dto.getComplemento());
+
+            return existente;
+        } else {
+            Endereco novo = new Endereco();
+            novo.setRua(dto.getRua());
+            novo.setNumero(dto.getNumero());
+            novo.setCep(dto.getCep());
+            novo.setBairro(dto.getBairro());
+            novo.setCidade(dto.getCidade());
+            novo.setEstado(dto.getEstado());
+            novo.setComplemento(dto.getComplemento());
+
+            return novo;
+        }
     }
+
 
     public static EnderecoDTO toDto(Endereco endereco) {
         EnderecoDTO enderecoDTO = new EnderecoDTO();

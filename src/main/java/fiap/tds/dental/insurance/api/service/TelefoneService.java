@@ -38,7 +38,7 @@ public class TelefoneService {
 
     public List<TelefoneDTO> findAll(){
         List<Telefone> list = telefoneRepository.findAll();
-        List<TelefoneDTO> dtos = list.stream().map(TelefoneService::toDto).toList();
+        List<TelefoneDTO> dtos = list.stream().map(this::toDto).toList();
         return dtos;
     }
 
@@ -55,15 +55,23 @@ public class TelefoneService {
         throw new RuntimeException("id não encontrado");
     }
 
-    public static Telefone toEntity(TelefoneDTO telefoneDTO){
-        Telefone telefone = new Telefone();
-        telefone.setId(telefoneDTO.getId());
-        telefone.setNumero(telefoneDTO.getNumero());
-        telefone.setTipo(telefoneDTO.getTipo());
-        return telefone;
+    public Telefone toEntity(TelefoneDTO dto) {
+        if (dto.getId() != null) {
+            // Já existe no banco, então busca e atualiza
+            Telefone existente = telefoneRepository.findById(dto.getId())
+                    .orElseThrow(() -> new RuntimeException("Telefone não encontrado"));
+            existente.setNumero(dto.getNumero());
+            existente.setTipo(dto.getTipo());
+            return existente;
+        }
+
+        Telefone novo = new Telefone();
+        novo.setNumero(dto.getNumero());
+        novo.setTipo(dto.getTipo());
+        return telefoneRepository.save(novo); // <- importante
     }
 
-    public static TelefoneDTO toDto(Telefone telefone){
+    public TelefoneDTO toDto(Telefone telefone){
         TelefoneDTO telefoneDTO = new TelefoneDTO();
         telefoneDTO.setId(telefone.getId());
         telefoneDTO.setNumero(telefone.getNumero());

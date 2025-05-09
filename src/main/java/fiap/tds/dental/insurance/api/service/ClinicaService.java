@@ -21,6 +21,9 @@ import java.util.Optional;
 public class ClinicaService {
     @Autowired
     private ClinicaRepository clinicaRepository;
+    private final EnderecoService enderecoService;
+    private final TelefoneService telefoneService;
+    private final UsuarioService usuarioService;
 
     public ClinicaDTO salvarClinica(ClinicaDTO clinicaDTO) {
         Clinica clinica;
@@ -67,7 +70,7 @@ public class ClinicaService {
 
     public List<ClinicaDTO> findAll(){
         List<Clinica> list = clinicaRepository.findAll();
-        List<ClinicaDTO> dtos = list.stream().map(ClinicaService::toDto).toList();
+        List<ClinicaDTO> dtos = list.stream().map(this::toDto).toList();
         return dtos;
     }
 
@@ -84,15 +87,15 @@ public class ClinicaService {
         throw new RuntimeException("id não encontrado");
     }
 
-    private static Clinica toEntity(ClinicaDTO clinicaDTO) {
+    private Clinica toEntity(ClinicaDTO clinicaDTO) {
         Clinica clinica = new Clinica();
         clinica.setId(clinicaDTO.getId());
         clinica.setCnpj(clinicaDTO.getCnpj());
         clinica.setNome(clinicaDTO.getNome());
 
-        clinica.setEndereco(EnderecoService.toEntity(clinicaDTO.getEndereco()));
-        clinica.setUsuario(UsuarioService.toEntity(clinicaDTO.getUsuario()));
-        clinica.setTelefone(TelefoneService.toEntity(clinicaDTO.getTelefone()));
+        clinica.setEndereco(enderecoService.toEntity(clinicaDTO.getEndereco()));
+        clinica.setUsuario(usuarioService.toEntity(clinicaDTO.getUsuario()));
+        clinica.setTelefone(telefoneService.toEntity(clinicaDTO.getTelefone()));
 
 //        clinica.setEndereco(clinica.getEndereco());
 //        clinica.setUsuario(clinica.getUsuario());
@@ -100,15 +103,15 @@ public class ClinicaService {
         return clinica;
     }
 
-    private static ClinicaDTO toDto(Clinica clinica) {
+    private ClinicaDTO toDto(Clinica clinica) {
         ClinicaDTO clinicaDTO = new ClinicaDTO();
         clinicaDTO.setId(clinica.getId());
         clinicaDTO.setCnpj(clinica.getCnpj());
         clinicaDTO.setNome(clinica.getNome());
 
         clinicaDTO.setEndereco(EnderecoService.toDto(clinica.getEndereco()));
-        clinicaDTO.setUsuario(UsuarioService.toDto(clinica.getUsuario()));
-        clinicaDTO.setTelefone(TelefoneService.toDto(clinica.getTelefone()));
+        clinicaDTO.setUsuario(usuarioService.toDto(clinica.getUsuario()));
+        clinicaDTO.setTelefone(telefoneService.toDto(clinica.getTelefone()));
 
         return clinicaDTO;
     }

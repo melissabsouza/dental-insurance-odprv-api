@@ -43,7 +43,7 @@ public class UsuarioService {
 
     public List<UsuarioDTO> findAll() {
         List<Usuario> list = usuarioRepository.findAll();
-        List<UsuarioDTO> dtos = list.stream().map(UsuarioService::toDto).toList();
+        List<UsuarioDTO> dtos = list.stream().map(this::toDto).toList();
         return dtos;
     }
 
@@ -61,16 +61,25 @@ public class UsuarioService {
     }
 
 
-    public static Usuario toEntity(UsuarioDTO usuarioDTO) {
-        Usuario usuario = new Usuario();
-        usuario.setId(usuarioDTO.getId());
-        usuario.setEmail(usuarioDTO.getEmail());
-        usuario.setSenha(usuarioDTO.getSenha());
-        usuario.setStatus(usuarioDTO.getStatus());
-        return usuario;
+    public Usuario toEntity(UsuarioDTO dto) {
+        if (dto.getId() != null) {
+            // Já existe no banco, então busca e atualiza
+            Usuario existente = usuarioRepository.findById(dto.getId())
+                    .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
+            existente.setEmail(dto.getEmail());
+            existente.setSenha(dto.getSenha());
+            existente.setStatus(dto.getStatus());
+            return existente;
+        }
+
+        Usuario novo = new Usuario();
+        novo.setEmail(dto.getEmail());
+        novo.setSenha(dto.getSenha());
+        novo.setStatus(dto.getStatus());
+        return usuarioRepository.save(novo);
     }
 
-    public static UsuarioDTO toDto(Usuario usuario) {
+    public UsuarioDTO toDto(Usuario usuario) {
         UsuarioDTO usuarioDTO = new UsuarioDTO();
         usuarioDTO.setId(usuario.getId());
         usuarioDTO.setEmail(usuario.getEmail());
