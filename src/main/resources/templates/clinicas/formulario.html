@@ -20,6 +20,12 @@
         <form th:action="@{${clinica.id == null ? '/clinicas' : '/clinicas/editar/' + clinica.id}}"
               th:object="${clinica}" method="post">
 
+            <input type="hidden" th:field="*{endereco.id}">
+            <input type="hidden" th:field="*{usuario.id}">
+            <input type="hidden" th:field="*{telefone.id}">
+
+
+
             <!-- Campo para CNPJ -->
             <label for="cnpj">CNPJ:</label>
             <input type="text" id="cnpj" th:field="*{cnpj}" required/>

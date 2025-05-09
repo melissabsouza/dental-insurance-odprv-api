@@ -26,6 +26,7 @@ public class ClinicaController {
     @GetMapping
     public String listarClinicas(Model model){
         List<ClinicaDTO> lista = clinicaService.findAll();
+        model.addAttribute("clinicas", lista);
         return "clinicas/lista";
     }
 
@@ -50,7 +51,7 @@ public class ClinicaController {
     @GetMapping("/editar/{id}")
     public String editarClinica(@PathVariable Long id, Model model){
         model.addAttribute("endereco", clinicaService.findById(id));
-        return "clinica/formulario";
+        return "clinicas/formulario";
     }
 
     @GetMapping("/deletar/{id}")

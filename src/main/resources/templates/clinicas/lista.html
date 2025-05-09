@@ -20,6 +20,7 @@
         <table class="w-full border-collapse">
             <thead>
             <tr class="bg-violet-600 text-white">
+                <th class="p-3 text-left">ID</th>
                 <th class="p-3 text-left">CNPJ</th>
                 <th class="p-3 text-left">Nome</th>
                 <th class="p-3 text-left">Usuário ID</th>
@@ -31,6 +32,7 @@
 
             <tbody>
             <tr class="border-b" th:each="clinica : ${clinicas}">
+                <td class="p-3 text-gray" th:text="${clinica.id}">id</td>
                 <td class="p-3 text-gray" th:text="${clinica.cnpj}">cnpj</td>
                 <td class="p-3" th:text="${clinica.nome}">nome</td>
                 <td class="p-3" th:text="${clinica.usuario}">usuario</td>
@@ -39,8 +41,8 @@
 
 
                 <td class="p-3">
-                    <a class="text-blue-600 hover:underline" th:href="@{/clinicas/editar/{id}(id=${clinica.cnpj})}">Editar</a>
-                    <a class="text-blue-600 hover:underline" th:href="@{/clinicas/deletar/{id}(id=${clinica.cnpj})}">Deletar</a>
+                    <a class="text-blue-600 hover:underline" th:href="@{/clinicas/editar/{id}(id=${clinica.id})}">Editar</a>
+                    <a class="text-blue-600 hover:underline" th:href="@{/clinicas/deletar/{id}(id=${clinica.id})}">Deletar</a>
                 </td>
             </tr>
             </tbody>
