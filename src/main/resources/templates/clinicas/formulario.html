@@ -17,8 +17,7 @@
     </div>
 
     <div class="flex items-center">
-        <form th:action="@{${clinica.id == null ? '/clinicas' : '/clinicas/editar/' + clinica.id}}"
-              th:object="${clinica}" method="post">
+        <form th:action="@{/clinicas}" method="post" th:object="${clinica}">
 
             <input type="hidden" th:field="*{endereco.id}">
             <input type="hidden" th:field="*{usuario.id}">

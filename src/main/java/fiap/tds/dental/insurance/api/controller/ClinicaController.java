@@ -38,7 +38,7 @@ public class ClinicaController {
         return "clinicas/formulario";
     }
     @PostMapping
-    public String salvarClinica(@Valid @ModelAttribute("endereco") ClinicaDTO clinica, BindingResult bindingResults, Model model){
+    public String salvarClinica(@Valid @ModelAttribute("clinica") ClinicaDTO clinica, BindingResult bindingResults, Model model){
         if(bindingResults.hasErrors()){
             bindingResults.getAllErrors().forEach(e-> log.info(e.toString()));
             model.addAttribute("clinica", clinica);
@@ -50,7 +50,7 @@ public class ClinicaController {
 
     @GetMapping("/editar/{id}")
     public String editarClinica(@PathVariable Long id, Model model){
-        model.addAttribute("endereco", clinicaService.findById(id));
+        model.addAttribute("clinica", clinicaService.findById(id));
         return "clinicas/formulario";
     }
 
