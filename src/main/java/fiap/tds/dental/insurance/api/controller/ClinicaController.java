@@ -1,7 +1,6 @@
 package fiap.tds.dental.insurance.api.controller;
 
 import fiap.tds.dental.insurance.api.dto.ClinicaDTO;
-import fiap.tds.dental.insurance.api.dto.EnderecoDTO;
 import fiap.tds.dental.insurance.api.dto.UsuarioDTO;
 import fiap.tds.dental.insurance.api.service.ClinicaService;
 import jakarta.validation.Valid;
@@ -20,42 +19,55 @@ import java.util.List;
 @Log
 @RequestMapping("/clinicas")
 public class ClinicaController {
+
     @Autowired
     private final ClinicaService clinicaService;
 
     @GetMapping
-    public String listarClinicas(Model model){
+    public String listarClinicas(Model model) {
         List<ClinicaDTO> lista = clinicaService.findAll();
         model.addAttribute("clinicas", lista);
         return "clinicas/lista";
     }
 
+
     @GetMapping("/novo")
-    public String novoClinica(Model model){
+    public String novoClinica(Model model) {
         ClinicaDTO clinicaDTO = new ClinicaDTO();
         clinicaDTO.setUsuario(new UsuarioDTO());
         model.addAttribute("clinica", clinicaDTO);
         return "clinicas/formulario";
     }
+
     @PostMapping
-    public String salvarClinica(@Valid @ModelAttribute("clinica") ClinicaDTO clinica, BindingResult bindingResults, Model model){
-        if(bindingResults.hasErrors()){
-            bindingResults.getAllErrors().forEach(e-> log.info(e.toString()));
-            model.addAttribute("clinica", clinica);
+    public String salvarClinica(@Valid @ModelAttribute("clinica") ClinicaDTO clinicaDTO,
+                                BindingResult bindingResults, Model model) {
+        if (bindingResults.hasErrors()) {
+            bindingResults.getAllErrors().forEach(e -> log.info(e.toString()));
+            model.addAttribute("clinica", clinicaDTO);
             return "clinicas/formulario";
         }
-        clinicaService.salvarClinica(clinica);
+
+        try {
+            clinicaService.salvarClinica(clinicaDTO);
+        } catch (RuntimeException e) {
+            log.info("Erro: " + e.getMessage());
+            model.addAttribute("erro", e.getMessage());
+            return "clinicas/formulario";
+        }
+
         return "redirect:/clinicas";
     }
 
     @GetMapping("/editar/{id}")
-    public String editarClinica(@PathVariable Long id, Model model){
-        model.addAttribute("clinica", clinicaService.findById(id));
+    public String editarClinica(@PathVariable Long id, Model model) {
+        ClinicaDTO clinicaDTO = clinicaService.findById(id);
+        model.addAttribute("clinica", clinicaDTO);
         return "clinicas/formulario";
     }
 
     @GetMapping("/deletar/{id}")
-    public String deletarClinica(@PathVariable Long id, Model model){
+    public String deletarClinica(@PathVariable Long id, Model model) {
         clinicaService.deleteById(id);
         return "redirect:/clinicas";
     }

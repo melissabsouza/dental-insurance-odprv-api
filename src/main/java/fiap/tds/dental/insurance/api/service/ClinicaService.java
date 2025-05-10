@@ -29,23 +29,65 @@ public class ClinicaService {
         Clinica clinica;
 
         if (clinicaDTO.getId() == null) {
-            clinica = toEntity(clinicaDTO);
+            clinica = new Clinica();
+
+            if (clinicaRepository.existsByCnpj(clinicaDTO.getCnpj())) {
+                throw new RuntimeException("Já existe uma clínica com esse CNPJ");
+            }
         } else {
             clinica = clinicaRepository.findById(clinicaDTO.getId())
-                    .orElseThrow(() -> new RuntimeException("Clinica não encontrada"));
+                    .orElseThrow(() -> new RuntimeException("Clínica não encontrada"));
 
-            clinica.setCnpj(clinicaDTO.getCnpj());
-            clinica.setNome(clinicaDTO.getNome());
-
-            attEndereco(clinica.getEndereco(), clinicaDTO.getEndereco());
-            attUsuario(clinica.getUsuario(), clinicaDTO.getUsuario());
-            attTelefone(clinica.getTelefone(), clinicaDTO.getTelefone());
+            if (!clinicaDTO.getCnpj().equals(clinica.getCnpj()) && clinicaRepository.existsByCnpj(clinicaDTO.getCnpj())) {
+                throw new RuntimeException("Já existe uma clínica com esse CNPJ");
+            }
         }
+
+        clinica.setCnpj(clinicaDTO.getCnpj());
+        clinica.setNome(clinicaDTO.getNome());
+
+        Endereco endereco = enderecoService.toEntity(clinicaDTO.getEndereco());
+        Telefone telefone = telefoneService.toEntity(clinicaDTO.getTelefone());
+        Usuario usuario = usuarioService.toEntity(clinicaDTO.getUsuario());
+
+        clinica.setEndereco(endereco);
+        clinica.setTelefone(telefone);
+        clinica.setUsuario(usuario);
 
         clinica = clinicaRepository.save(clinica);
         return toDto(clinica);
     }
 
+
+    public ClinicaDTO editarClinica(ClinicaDTO clinicaDTO) {
+        if (clinicaDTO.getNome() == null || clinicaDTO.getNome().isEmpty()) {
+            throw new RuntimeException("O nome não pode ser nulo ou vazio");
+        }
+
+        Clinica clinica = clinicaRepository.findById(clinicaDTO.getId())
+                .orElseThrow(() -> new RuntimeException("Clínica não encontrada"));
+
+        if (!clinicaDTO.getCnpj().equals(clinica.getCnpj())) {
+            if (clinicaRepository.existsByCnpj(clinicaDTO.getCnpj())) {
+                throw new RuntimeException("Já existe uma clínica com esse novo CNPJ");
+            }
+            clinica.setCnpj(clinicaDTO.getCnpj());
+        }
+
+        clinica.setNome(clinicaDTO.getNome());
+
+        Endereco endereco = enderecoService.toEntity(clinicaDTO.getEndereco());
+        Telefone telefone = telefoneService.toEntity(clinicaDTO.getTelefone());
+        Usuario usuario = usuarioService.toEntity(clinicaDTO.getUsuario());
+
+        clinica.setEndereco(endereco);
+        clinica.setTelefone(telefone);
+        clinica.setUsuario(usuario);
+
+        clinica = clinicaRepository.save(clinica);
+
+        return toDto(clinica);
+    }
 
     private void attEndereco(Endereco endereco, EnderecoDTO enderecoDTO) {
         endereco.setRua(enderecoDTO.getRua());

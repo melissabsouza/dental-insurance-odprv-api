@@ -63,7 +63,6 @@ public class UsuarioService {
 
     public Usuario toEntity(UsuarioDTO dto) {
         if (dto.getId() != null) {
-            // Já existe no banco, então busca e atualiza
             Usuario existente = usuarioRepository.findById(dto.getId())
                     .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
             existente.setEmail(dto.getEmail());

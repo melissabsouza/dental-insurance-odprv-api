@@ -63,7 +63,6 @@ public class EnderecoService {
             Endereco existente = enderecoRepository.findById(dto.getId())
                     .orElseThrow(() -> new RuntimeException("Endereço não encontrado"));
 
-            // Atualiza os campos existentes
             existente.setRua(dto.getRua());
             existente.setNumero(dto.getNumero());
             existente.setCep(dto.getCep());
@@ -72,7 +71,7 @@ public class EnderecoService {
             existente.setEstado(dto.getEstado());
             existente.setComplemento(dto.getComplemento());
 
-            return existente;
+            return enderecoRepository.save(existente);
         } else {
             Endereco novo = new Endereco();
             novo.setRua(dto.getRua());
@@ -83,9 +82,10 @@ public class EnderecoService {
             novo.setEstado(dto.getEstado());
             novo.setComplemento(dto.getComplemento());
 
-            return novo;
+            return enderecoRepository.save(novo);
         }
     }
+
 
 
     public static EnderecoDTO toDto(Endereco endereco) {
