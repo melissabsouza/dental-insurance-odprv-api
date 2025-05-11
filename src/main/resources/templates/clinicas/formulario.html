@@ -4,103 +4,122 @@
     <meta charset="UTF-8">
     <title>Cadastro de Clínicas</title>
     <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        :root {
+            --cor-vermelho: #FF6052;
+            --cor--azul: #003EA6;
+        }
+    </style>
 </head>
-<body class="flex justify-center items-center h-screen m-10">
+<body class="flex justify-center items-center min-h-screen bg-gray-100 p-10">
 
-<div class="bg-white p-8 rounded-lg border-4 border-gray-300 w-full max-w-lg h-90" >
-
-    <div class="flex flex-col justify-center items-center ">
-        <h2 class="text-xl font-black text-black text-center mb-4">Cadastro de Clínicas</h2>
-        <a class="text-black mb-4" th:href="@{/clinicas}">Lista de clínicas </a>
-
-
+<div class="bg-white p-8 rounded-2xl shadow-xl border border-gray-300 w-full max-w-4xl">
+    <div class="flex flex-col items-center">
+        <h2 class="text-2xl font-extrabold mb-2" style="color: var(--cor--azul);">Cadastro de Clínicas</h2>
+        <a class="text-sm hover:underline mb-6 flex items-center gap-1" style="color: var(--cor--azul);" th:href="@{/clinicas}">
+            <svg class="w-4 h-4" stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+            Lista de Clínicas
+        </a>
     </div>
 
-    <div class="flex items-center">
-        <form th:action="@{/clinicas}" method="post" th:object="${clinica}">
+    <form th:action="@{/clinicas}" method="post" th:object="${clinica}" class="grid grid-cols-1 md:grid-cols-2 gap-4">
 
-            <input type="hidden" th:field="*{endereco.id}">
-            <input type="hidden" th:field="*{usuario.id}">
-            <input type="hidden" th:field="*{telefone.id}">
+        <input type="hidden" th:field="*{endereco.id}">
+        <input type="hidden" th:field="*{usuario.id}">
+        <input type="hidden" th:field="*{telefone.id}">
+        <input type="hidden" th:field="*{id}">
 
-            <input type="hidden" th:field="*{id}">
+        <div class="flex flex-col">
+            <label for="cnpj" class="block font-medium">CNPJ</label>
+            <input type="text" id="cnpj" th:field="*{cnpj}" class="mt-1 w-full p-2 border rounded-lg border-gray-300" required/>
+            <li th:each="err : ${#fields.errors('cnpj')}" th:text="${err}" class="text-red-500 text-sm mt-1"></li>
+        </div>
 
+        <div class="flex flex-col">
+            <label for="nome" class="block font-medium">Nome</label>
+            <input type="text" id="nome" th:field="*{nome}" class="mt-1 w-full p-2 border rounded-lg border-gray-300" required/>
+            <li th:each="err : ${#fields.errors('nome')}" th:text="${err}" class="text-red-500 text-sm mt-1"></li>
+        </div>
 
+        <div class="flex flex-col">
+            <label for="telefone" class="block font-medium">Telefone</label>
+            <input type="text" id="telefone" th:field="*{telefone.numero}" class="mt-1 w-full p-2 border rounded-lg border-gray-300" required/>
+            <li th:each="err : ${#fields.errors('telefone.numero')}" th:text="${err}" class="text-red-500 text-sm mt-1"></li>
+        </div>
 
-            <!-- Campo para CNPJ -->
-            <label for="cnpj">CNPJ:</label>
-            <input type="text" id="cnpj" th:field="*{cnpj}" required/>
-            <br>
-
-            <!-- Campo para Nome -->
-            <label for="nome">Nome:</label>
-            <input type="text" id="nome" th:field="*{nome}" required/>
-            <br>
-
-            <!-- Campo para Endereço -->
-            <h3>Endereço</h3>
-            <label for="rua">Rua:</label>
-            <input type="text" id="rua" th:field="*{endereco.rua}" required/>
-            <br>
-
-            <label for="numero">Número:</label>
-            <input type="text" id="numero" th:field="*{endereco.numero}" required/>
-            <br>
-
-            <label for="bairro">Bairro:</label>
-            <input type="text" id="bairro" th:field="*{endereco.bairro}" required/>
-            <br>
-
-            <label for="cep">CEP:</label>
-            <input type="text" id="cep" th:field="*{endereco.cep}" required/>
-            <br>
-
-            <label for="cidade">Cidade:</label>
-            <input type="text" id="cidade" th:field="*{endereco.cidade}" required/>
-            <br>
-
-            <label for="estado">Estado:</label>
-            <input type="text" id="estado" th:field="*{endereco.estado}" required/>
-            <br>
-
-            <label for="complemento">Complemento:</label>
-            <input type="text" id="complemento" th:field="*{endereco.complemento}"/>
-            <br>
-
-            <!-- Campo para Usuario -->
-            <h3>Usuário</h3>
-            <label for="email">Email:</label>
-            <input type="email" id="email" th:field="*{usuario.email}" required/>
-            <br>
-
-            <label for="senha">Senha:</label>
-            <input type="password" id="senha" th:field="*{usuario.senha}" required/>
-            <br>
-
-            <label for="status">Status:</label>
-            <select th:field="*{usuario.status}">
-                <option th:value="null" disabled selected>Selecione o status</option>
-                <option th:value="ATIVO" th:text="Ativo">Ativo</option>
-                <option th:value="INATIVO" th:text="Inativo">Inativo</option>
+        <div class="flex flex-col">
+            <label for="tipo" class="block font-medium">Tipo</label>
+            <select th:field="*{telefone.tipo}" class="mt-1 w-full p-2 border rounded-lg border-gray-300">
+                <option th:value="null" disabled selected>Selecione o tipo</option>
+                <option th:value="COMERCIAL">Comercial</option>
+                <option th:value="RESIDENCIAL">Residencial</option>
+                <option th:value="CELULAR">Celular</option>
             </select>
-            <br>
+            <li th:each="err : ${#fields.errors('telefone.tipo')}" th:text="${err}" class="text-red-500 text-sm mt-1"></li>
+        </div>
 
-            <!-- Campo para Telefone -->
-            <h3>Telefone</h3>
-            <label for="tipo">Tipo:</label>
-            <input type="text" id="tipo" th:field="*{telefone.tipo}" required/>
-            <br>
+        <div class="flex flex-col">
+                <label for="email" class="block font-medium">Email</label>
+                <input type="email" id="email" th:field="*{usuario.email}" class="mt-1 w-full p-2 border rounded-lg border-gray-300" required/>
+                <li th:each="err : ${#fields.errors('usuario.email')}" th:text="${err}" class="text-red-500 text-sm mt-1"></li>
+        </div>
 
-            <label for="numeroTelefone">Número:</label>
-            <input type="text" id="numeroTelefone" th:field="*{telefone.numero}" required/>
-            <br>
+        <div class="flex flex-col">
+            <label for="senha" class="block font-medium">Senha</label>
+            <input type="password" id="senha" th:field="*{usuario.senha}" class="mt-1 w-full p-2 border rounded-lg border-gray-300" required/>
+            <li th:each="err : ${#fields.errors('usuario.senha')}" th:text="${err}" class="text-red-500 text-sm mt-1"></li>
+        </div>
 
-            <!-- Botão para Submeter -->
-            <button type="submit">Salvar</button>
+        <div class="flex flex-col">
+            <label for="status" class="block font-medium">Status</label>
+            <select th:field="*{usuario.status}" class="mt-1 w-full p-2 border rounded-lg border-gray-300">
+                <option th:value="null" disabled selected>Selecione o status</option>
+                <option th:value="ATIVO">Ativo</option>
+                <option th:value="INATIVO">Inativo</option>
+            </select>
+            <li th:each="err : ${#fields.errors('usuario.status')}" th:text="${err}" class="text-red-500 text-sm mt-1"></li>
+        </div>
 
-        </form>
+        <div class="flex flex-col col-span-2">
+            <h3 class="text-xl font-semibold mb-2">Endereço</h3>
+            <label for="rua" class="block font-medium">Rua</label>
+            <input type="text" id="rua" th:field="*{endereco.rua}" class="mt-1 w-full p-2 border rounded-lg border-gray-300" required/>
+            <li th:each="err : ${#fields.errors('endereco.rua')}" th:text="${err}" class="text-red-500 text-sm mt-1"></li>
 
-    </div>
+            <label for="numero" class="block font-medium mt-2">Número</label>
+            <input type="text" id="numero" th:field="*{endereco.numero}" class="mt-1 w-full p-2 border rounded-lg border-gray-300" required/>
+            <li th:each="err : ${#fields.errors('endereco.numero')}" th:text="${err}" class="text-red-500 text-sm mt-1"></li>
+
+            <label for="bairro" class="block font-medium mt-2">Bairro</label>
+            <input type="text" id="bairro" th:field="*{endereco.bairro}" class="mt-1 w-full p-2 border rounded-lg border-gray-300" required/>
+            <li th:each="err : ${#fields.errors('endereco.bairro')}" th:text="${err}" class="text-red-500 text-sm mt-1"></li>
+
+            <label for="cep" class="block font-medium mt-2">CEP</label>
+            <input type="text" id="cep" th:field="*{endereco.cep}" class="mt-1 w-full p-2 border rounded-lg border-gray-300" required/>
+            <li th:each="err : ${#fields.errors('endereco.cep')}" th:text="${err}" class="text-red-500 text-sm mt-1"></li>
+
+            <label for="cidade" class="block font-medium mt-2">Cidade</label>
+            <input type="text" id="cidade" th:field="*{endereco.cidade}" class="mt-1 w-full p-2 border rounded-lg border-gray-300" required/>
+            <li th:each="err : ${#fields.errors('endereco.cidade')}" th:text="${err}" class="text-red-500 text-sm mt-1"></li>
+
+            <label for="estado" class="block font-medium mt-2">Estado</label>
+            <input type="text" id="estado" th:field="*{endereco.estado}" class="mt-1 w-full p-2 border rounded-lg border-gray-300" required/>
+            <li th:each="err : ${#fields.errors('endereco.estado')}" th:text="${err}" class="text-red-500 text-sm mt-1"></li>
+
+            <label for="complemento" class="block font-medium mt-2">Complemento</label>
+            <input type="text" id="complemento" th:field="*{endereco.complemento}" class="mt-1 w-full p-2 border rounded-lg border-gray-300"/>
+            <li th:each="err : ${#fields.errors('endereco.complemento')}" th:text="${err}" class="text-red-500 text-sm mt-1"></li>
+
+        </div>
+
+        <div class="flex justify-center mt-6 col-span-2">
+            <button type="submit" class="px-6 py-2 rounded-lg text-white transition-colors" style="background-color: var(--cor-vermelho);">
+                Salvar
+            </button>
+        </div>
+
+    </form>
 </div>
 
 </body>

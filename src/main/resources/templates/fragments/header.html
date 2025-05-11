@@ -5,13 +5,15 @@
 <header class="bg-white shadow-md mb-20">
     <div class="container mx-auto px-4 py-4 flex justify-between items-center">
         <div class="text-2xl font-bold text-gray-800">
-            Sprint 3
+            Dental Insurance
         </div>
         <nav class="hidden md:flex space-x-6">
             <a th:href="@{/}" class="text-gray-600 hover:text-blue-600">Home</a>
-            <a th:href="@{/usuarios}" class="text-gray-600 hover:text-blue-600">Usuários</a>
-            <a th:href="@{/telefones}" class="text-gray-600 hover:text-blue-600">Telefones</a>
-            <a th:href="@{/enderecos}" class="text-gray-600 hover:text-blue-600">Endereços</a>
+            <a th:href="@{/clinicas}" class="text-gray-600 hover:text-blue-600">Clínicas</a>
+            <a th:href="@{/pacientes}" class="text-gray-600 hover:text-blue-600">Pacientes</a>
+            <a th:href="@{/dentistas}" class="text-gray-600 hover:text-blue-600">Dentistas</a>
+            <a th:href="@{/atendimentos}" class="text-gray-600 hover:text-blue-600">Atendimentos</a>
+
         </nav>
         <div class="md:hidden">
             <button id="hamburger" class="focus:outline-none">
@@ -23,9 +25,10 @@
     </div>
     <nav id="mobileMenu" class="md:hidden bg-white shadow-md">
         <a th:href="@{/}" class="block px-4 py-2 text-gray-600 hover:bg-gray-100">Home</a>
-        <a th:href="@{/usuarios}" class="text-gray-600 hover:text-blue-600">Usuários</a>
-        <a th:href="@{/telefones}" class="text-gray-600 hover:text-blue-600">Telefones</a>
-        <a th:href="@{/enderecos}" class="text-gray-600 hover:text-blue-600">Endereços</a>
+        <a th:href="@{/clinicas}" class="text-gray-600 hover:text-blue-600">Clínicas</a>
+        <a th:href="@{/pacientes}" class="text-gray-600 hover:text-blue-600">Pacientes</a>
+        <a th:href="@{/dentistas}" class="text-gray-600 hover:text-blue-600">Dentistas</a>
+        <a th:href="@{/atendimentos}" class="text-gray-600 hover:text-blue-600">Atendimentos</a>
     </nav>
 </header>
 

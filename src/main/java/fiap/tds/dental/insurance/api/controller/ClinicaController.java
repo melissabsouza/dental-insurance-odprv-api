@@ -1,6 +1,8 @@
 package fiap.tds.dental.insurance.api.controller;
 
 import fiap.tds.dental.insurance.api.dto.ClinicaDTO;
+import fiap.tds.dental.insurance.api.dto.EnderecoDTO;
+import fiap.tds.dental.insurance.api.dto.TelefoneDTO;
 import fiap.tds.dental.insurance.api.dto.UsuarioDTO;
 import fiap.tds.dental.insurance.api.service.ClinicaService;
 import jakarta.validation.Valid;
@@ -35,6 +37,8 @@ public class ClinicaController {
     public String novoClinica(Model model) {
         ClinicaDTO clinicaDTO = new ClinicaDTO();
         clinicaDTO.setUsuario(new UsuarioDTO());
+        clinicaDTO.setTelefone(new TelefoneDTO());
+        clinicaDTO.setEndereco(new EnderecoDTO());
         model.addAttribute("clinica", clinicaDTO);
         return "clinicas/formulario";
     }
