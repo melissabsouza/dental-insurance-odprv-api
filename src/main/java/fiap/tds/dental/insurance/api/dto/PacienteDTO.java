@@ -37,7 +37,7 @@ public class PacienteDTO {
 
     @Pattern(regexp = "([0-9]{2}[\\.]?[0-9]{3}[\\.]?[0-9]{3}[\\/]?[0-9]{4}[-]?[0-9]{2})|([0-9]{3}[\\.]?[0-9]{3}[\\.]?[0-9]{3}[-]?[0-9]{2})",
             message = "use 00000000000, 00000000000000, 000.000.000-00, 00.000.000/0000-00 e até 000000000-00 ou 00000000/0000-00")
-    private String ClinicaCnpj;
+    private String clinicaCnpj;
 
     private EnderecoDTO endereco;
     private TelefoneDTO telefone;
