@@ -1,11 +1,9 @@
 package fiap.tds.dental.insurance.api.dto;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 import lombok.Data;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Date;
 
@@ -26,8 +24,9 @@ public class AtendimentoDTO {
     @NotNull(message = "Data de atendimento não pode ser nula")
     private LocalDateTime dataAtendimento;
 
-    @NotBlank(message = "O custo não pode ser vazio")
-    private float custoEstimado;
+    @NotNull(message = "O custo não pode ser vazio")
+    @Positive(message = "O custo deve ser maior que zero")
+    private BigDecimal custoEstimado;
 
     @NotBlank(message = "Cpf é obrigatório")
     @NotNull(message = "Cpf não pode ser nulo")

@@ -1,7 +1,6 @@
 package fiap.tds.dental.insurance.api.service;
 
 import fiap.tds.dental.insurance.api.dto.DentistaDTO;
-import fiap.tds.dental.insurance.api.dto.PacienteDTO;
 import fiap.tds.dental.insurance.api.entity.*;
 import fiap.tds.dental.insurance.api.repository.ClinicaRepository;
 import fiap.tds.dental.insurance.api.repository.DentistaRepository;

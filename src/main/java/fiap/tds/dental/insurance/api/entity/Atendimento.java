@@ -3,10 +3,12 @@ package fiap.tds.dental.insurance.api.entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 import lombok.ToString;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Date;
 
@@ -37,9 +39,10 @@ public class Atendimento {
     @Column(name = "data_atendimento", nullable = false)
     private LocalDateTime dataAtendimento;
 
-    @NotBlank(message = "O custo não pode ser vazio")
+    @NotNull(message = "O custo não pode ser vazio")
+    @Positive(message = "O custo deve ser maior que zero")
     @Column(name = "custo_estimado", nullable = false)
-    private float custoEstimado;
+    private BigDecimal custoEstimado;
 
     @OneToOne
     @JoinColumn(name = "cpf_paciente", referencedColumnName = "cpf_paciente", nullable = false)
