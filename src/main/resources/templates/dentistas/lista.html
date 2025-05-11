@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <title>Lista de Dentistas</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="p-6">
+<div th:insert="~{fragments/header :: header}">
+  MENU NO HEADER
+</div>
+<div>
+  <h1 class="text-xl font-black text-black text-center mb-4">Lista de Dentista</h1>
+
+  <div class="text-center mt-8">
+    <a class="text-black mb-4" th:href="@{/dentistas/novo}" >Novo Dentista</a>
+  </div>
+
+  <div class="p-6">
+    <table class="w-full border-collapse">
+      <thead>
+      <tr class="bg-violet-600 text-white">
+        <th class="p-3 text-left">ID</th>
+        <th class="p-3 text-left">CPF</th>
+        <th class="p-3 text-left">Nome</th>
+        <th class="p-3 text-left">Email</th>
+        <th class="p-3 text-left">Data de Contratação</th>
+        <th class="p-3 text-left">CRO</th>
+        <th class="p-3 text-left">Especialidade</th>
+        <th class="p-3 text-left">Clinica</th>
+        <th class="p-3 text-left">Endereço</th>
+        <th class="p-3 text-left">Telefone</th>
+        <th class="p-3 text-left">Ações</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="border-b" th:each="dentista : ${dentistas}">
+        <td class="p-3 text-gray" th:text="${dentista.id}">id</td>
+        <td class="p-3 text-gray" th:text="${dentista.cpf}">cpf</td>
+        <td class="p-3" th:text="${dentista.nome}">nome</td>
+        <td class="p-3" th:text="${dentista.email}">email</td>
+        <td class="p-3" th:text="${dentista.dataContratacao}">dataContratacao</td>
+        <td class="p-3" th:text="${dentista.cro}">cro</td>
+        <td class="p-3" th:text="${dentista.especialidade}">especialidade</td>
+
+        <!-- Aqui, vamos corrigir a expressão de clinicaCnpj -->
+        <td class="p-3" th:text="${dentista.clinicaCnpj}">clinica</td>
+
+        <!-- Para o endereço, assegure-se que dentista.endereco não seja null -->
+        <td class="p-3 text-gray"
+            th:text="${dentista.endereco != null ? dentista.endereco.rua + ' - ' + dentista.endereco.numero + '. ' + dentista.endereco.cidade + ', ' + dentista.endereco.estado + '. CEP: ' + dentista.endereco.cep : 'Endereço não disponível'}">
+          endereço
+        </td>
+
+        <td class="p-3"
+            th:text="${dentista.telefone != null ? dentista.telefone.numero : 'Telefone não disponível'}">
+          telefone
+        </td>
+
+        <td class="p-3">
+          <a class="text-blue-600 hover:underline" th:href="@{/dentistas/editar/{id}(id=${dentista.id})}">Editar</a>
+          <a class="text-blue-600 hover:underline" th:href="@{/dentistas/deletar/{id}(id=${dentista.id})}">Deletar</a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+</body>
+</html>

@@ -1,8 +1,6 @@
 package fiap.tds.dental.insurance.api.controller;
 
-import fiap.tds.dental.insurance.api.dto.ClinicaDTO;
 import fiap.tds.dental.insurance.api.dto.PacienteDTO;
-import fiap.tds.dental.insurance.api.dto.UsuarioDTO;
 import fiap.tds.dental.insurance.api.service.PacienteService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;

@@ -8,6 +8,7 @@ import jakarta.validation.constraints.Size;
 import lombok.Data;
 import lombok.ToString;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Data
@@ -52,7 +53,7 @@ public class Dentista {
 
     @NotNull(message = "Data não pode ser nula")
     @Column(name = "data_contratacao", nullable = false)
-    private Date dataContratacao;
+    private LocalDate dataContratacao;
 
     @OneToOne
     @JoinColumn(name = "cnpj_clinica", referencedColumnName = "cnpj_clinica", nullable = false)

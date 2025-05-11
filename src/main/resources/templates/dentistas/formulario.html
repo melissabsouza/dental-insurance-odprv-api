@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <title>Cadastro de Dentistas</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="flex justify-center items-center h-screen m-10">
+
+<div class="bg-white p-8 rounded-lg border-4 border-gray-300 w-full max-w-lg h-90" >
+
+  <div class="flex flex-col justify-center items-center ">
+    <h2 class="text-xl font-black text-black text-center mb-4">Cadastro de Dentistas</h2>
+    <a class="text-black mb-4" th:href="@{/dentistas}">Lista de Dentistas </a>
+
+
+  </div>
+
+  <div class="flex items-center">
+    <form th:action="@{/dentistas}" method="post" th:object="${dentista}">
+
+      <input type="hidden" th:field="*{id}">
+
+      <input type="hidden" th:field="*{endereco.id}">
+      <input type="hidden" th:field="*{telefone.id}">
+
+      <!-- Campo para CNPJ -->
+      <label for="cpf">CPF:</label>
+      <input type="text" id="cpf" th:field="*{cpf}" required/>
+      <br>
+
+      <!-- Campo para Nome -->
+      <label for="nome">Nome:</label>
+      <input type="text" id="nome" th:field="*{nome}" required/>
+      <br>
+
+      <label for="cro">CRO:</label>
+      <input type="text" id="cro" th:field="*{cro}" required/>
+      <br>
+
+      <label for="especialidade">Especialidade:</label>
+      <input type="text" id="especialidade" th:field="*{especialidade}" required/>
+      <br>
+
+      <label class="block text-black font-medium mb-2" for="email">Email</label>
+      <input class="w-96 p-3 border border-gray-300 rounded-lg" th:field="*{email}" type="email" id="email" name="email" placeholder="Email">
+      <li th:each="err : ${#fields.errors('email')}" th:text="${err}">ERRO</li>
+
+      <label class="block text-black font-medium mb-2" for="dataContratacao">Data de Contratação</label>
+      <input class="w-96 p-3 border border-gray-300 rounded-lg" th:field="*{dataContratacao}" type="date" id="dataContratacao" name="dataContratacao">
+
+
+      <label for="clinicaCnpj">Clinica:</label>
+      <input type="text" id="clinicaCnpj" th:field="*{clinicaCnpj}" required/>
+      <br>
+
+      <!-- Campo para Endereço -->
+      <h3>Endereço</h3>
+      <label for="rua">Rua:</label>
+      <input type="text" id="rua" th:field="*{endereco.rua}" required/>
+      <br>
+
+      <label for="numero">Número:</label>
+      <input type="text" id="numero" th:field="*{endereco.numero}" required/>
+      <br>
+
+      <label for="bairro">Bairro:</label>
+      <input type="text" id="bairro" th:field="*{endereco.bairro}" required/>
+      <br>
+
+      <label for="cep">CEP:</label>
+      <input type="text" id="cep" th:field="*{endereco.cep}" required/>
+      <br>
+
+      <label for="cidade">Cidade:</label>
+      <input type="text" id="cidade" th:field="*{endereco.cidade}" required/>
+      <br>
+
+      <label for="estado">Estado:</label>
+      <input type="text" id="estado" th:field="*{endereco.estado}" required/>
+      <br>
+
+      <label for="complemento">Complemento:</label>
+      <input type="text" id="complemento" th:field="*{endereco.complemento}"/>
+      <br>
+
+
+
+      <!-- Campo para Telefone -->
+      <h3>Telefone</h3>
+      <label for="tipo">Tipo:</label>
+      <input type="text" id="tipo" th:field="*{telefone.tipo}" required/>
+      <br>
+
+      <label for="numeroTelefone">Número:</label>
+      <input type="text" id="numeroTelefone" th:field="*{telefone.numero}" required/>
+      <br>
+
+      <!-- Botão para Submeter -->
+      <button type="submit">Salvar</button>
+
+    </form>
+
+  </div>
+</div>
+
+</body>
+</html>

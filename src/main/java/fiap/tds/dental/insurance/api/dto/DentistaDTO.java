@@ -7,7 +7,7 @@ import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Data
 public class DentistaDTO {
@@ -38,7 +38,7 @@ public class DentistaDTO {
     private String email;
 
     @NotNull(message = "Data não pode ser nula")
-    private Date dataContratacao;
+    private LocalDate dataContratacao;
 
 
     @Pattern(regexp = "([0-9]{2}[\\.]?[0-9]{3}[\\.]?[0-9]{3}[\\/]?[0-9]{4}[-]?[0-9]{2})|([0-9]{3}[\\.]?[0-9]{3}[\\.]?[0-9]{3}[-]?[0-9]{2})",
