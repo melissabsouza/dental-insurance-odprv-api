@@ -18,6 +18,7 @@ import java.time.LocalDate;
 public class Paciente {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_paciente", unique = true, nullable = false)
     private Long id;
 
