@@ -1,9 +1,13 @@
 package fiap.tds.dental.insurance.api.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.Data;
 import lombok.ToString;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Data
@@ -17,15 +21,23 @@ public class Atendimento {
     @Column(name = "id_atendimento")
     private Long id;
 
+    @Size(min = 3, message = "O procedimento deve ter pelo menos 5 caracteres")
+    @NotBlank(message = "O procedimento não pode ser vazio")
+    @NotNull(message = "O procedimento não pode ser nulo")
     @Column(name = "tipo_procedimento", length = 100, nullable = false)
     private String tipoProcedimento;
 
-    @Column(name = "descricao_atendimento", length = 150, nullable = false)
+    @Size(min = 3, message = "A descrição deve ter pelo menos 5 caracteres")
+    @NotBlank(message = "A descrição não pode ser vazio")
+    @NotNull(message = "A descrição não pode ser nulo")
+    @Column(name = "descricao_atendimento", length = 200, nullable = false)
     private String descricao;
 
+    @NotNull(message = "Data de atendimento não pode ser nula")
     @Column(name = "data_atendimento", nullable = false)
-    private Date dataAtendimento;
+    private LocalDateTime dataAtendimento;
 
+    @NotBlank(message = "O custo não pode ser vazio")
     @Column(name = "custo_estimado", nullable = false)
     private float custoEstimado;
 
