@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <title>Lista de Pacientes</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="p-6">
+<div th:insert="~{fragments/header :: header}">
+  MENU NO HEADER
+</div>
+<div>
+  <h1 class="text-xl font-black text-black text-center mb-4">Lista de Pacientes</h1>
+
+  <div class="text-center mt-8">
+    <a class="text-black mb-4" th:href="@{/pacientes/novo}" >Novo Paciente</a>
+  </div>
+
+  <div class="p-6">
+    <table class="w-full border-collapse">
+      <thead>
+      <tr class="bg-violet-600 text-white">
+        <th class="p-3 text-left">ID</th>
+        <th class="p-3 text-left">CPF</th>
+        <th class="p-3 text-left">Nome</th>
+        <th class="p-3 text-left">Data de Nascimento</th>
+        <th class="p-3 text-left">Genero</th>
+        <th class="p-3 text-left">Clinica</th>
+        <th class="p-3 text-left">Endereço</th>
+        <th class="p-3 text-left">Telefone</th>
+        <th class="p-3 text-left">Ações</th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <tr class="border-b" th:each="paciente : ${pacientes}">
+        <td class="p-3 text-gray" th:text="${paciente.id}">id</td>
+        <td class="p-3 text-gray" th:text="${paciente.cpf}">cpf</td>
+        <td class="p-3" th:text="${paciente.nome}">nome</td>
+        <td class="p-3" th:text="${paciente.dataNascimento}">datanasc</td>
+        <td class="p-3" th:text="${paciente.genero}">genero</td>
+        <td class="p-3" th:text="${paciente.clinicaCnpj}">clinica</td>
+        <td class="p-3 text-gray" th:text="${paciente.endereco.rua
+        + ' - '
+        + paciente.endereco.numero
+        + '. ' + paciente.endereco.cidade
+        + ', ' + paciente.endereco.estado
+        + '. CEP: '+ paciente.endereco.cep
+                }">endereço</td>
+        <td class="p-3" th:text="${paciente.telefone.numero}">telefone</td>
+
+
+        <td class="p-3">
+          <a class="text-blue-600 hover:underline" th:href="@{/pacientes/editar/{id}(id=${paciente.id})}">Editar</a>
+          <a class="text-blue-600 hover:underline" th:href="@{/pacientes/deletar/{id}(id=${paciente.id})}">Deletar</a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+</body>
+</html>

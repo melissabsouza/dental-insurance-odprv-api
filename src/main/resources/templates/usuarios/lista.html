@@ -36,8 +36,8 @@
                 <td class="p-3" th:text="${usuario.status}">status</td>
 
                 <td class="p-3">
-                    <a class="text-blue-600 hover:underline" th:href="@{/templates/usuarios/editar/{id}(id=${usuario.id})}">Editar</a>
-                    <a class="text-blue-600 hover:underline" th:href="@{/templates/usuarios/deletar/{id}(id=${usuario.id})}">Deletar</a>
+                    <a class="text-blue-600 hover:underline" th:href="@{/usuarios/editar/{id}(id=${usuario.id})}">Editar</a>
+                    <a class="text-blue-600 hover:underline" th:href="@{/usuarios/deletar/{id}(id=${usuario.id})}">Deletar</a>
                 </td>
             </tr>
             </tbody>

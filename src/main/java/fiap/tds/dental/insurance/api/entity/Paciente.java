@@ -10,7 +10,6 @@ import lombok.Data;
 import lombok.ToString;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 @Data
 @ToString
@@ -35,12 +34,12 @@ public class Paciente {
     @Column(name = "nome_paciente", length = 100, nullable = false)
     private String nome;
 
-
     @NotNull(message = "Data não pode ser nula")
     private LocalDate dataNascimento;
 
     @Column(name = "genero_paciente", length = 100, nullable = false)
     @NotNull(message = "gênero não pode ser nulo")
+    @Enumerated(EnumType.STRING)
     private TipoGenero genero;
 
     @OneToOne

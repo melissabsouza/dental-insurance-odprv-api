@@ -138,10 +138,6 @@ public class ClinicaService {
         clinica.setEndereco(enderecoService.toEntity(clinicaDTO.getEndereco()));
         clinica.setUsuario(usuarioService.toEntity(clinicaDTO.getUsuario()));
         clinica.setTelefone(telefoneService.toEntity(clinicaDTO.getTelefone()));
-
-//        clinica.setEndereco(clinica.getEndereco());
-//        clinica.setUsuario(clinica.getUsuario());
-//        clinica.setTelefone(clinica.getTelefone());
         return clinica;
     }
 

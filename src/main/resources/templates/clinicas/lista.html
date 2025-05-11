@@ -23,9 +23,9 @@
                 <th class="p-3 text-left">ID</th>
                 <th class="p-3 text-left">CNPJ</th>
                 <th class="p-3 text-left">Nome</th>
-                <th class="p-3 text-left">Usuário ID</th>
-                <th class="p-3 text-left">Endereço ID</th>
-                <th class="p-3 text-left">Telefone ID</th>
+                <th class="p-3 text-left">Email do Usuário</th>
+                <th class="p-3 text-left">Endereço</th>
+                <th class="p-3 text-left">Telefone</th>
                 <th class="p-3 text-left">Ações</th>
             </tr>
             </thead>
@@ -35,9 +35,11 @@
                 <td class="p-3 text-gray" th:text="${clinica.id}">id</td>
                 <td class="p-3 text-gray" th:text="${clinica.cnpj}">cnpj</td>
                 <td class="p-3" th:text="${clinica.nome}">nome</td>
-                <td class="p-3" th:text="${clinica.usuario}">usuario</td>
-                <td class="p-3" th:text="${clinica.endereco}">endereco</td>
-                <td class="p-3" th:text="${clinica.telefone}">telefone</td>
+                <td class="p-3" th:text="${clinica.usuario.email}">usuario</td>
+                <td class="p-3 text-gray" th:text="${clinica.endereco.rua + ' - ' + clinica.endereco.numero
+                + '. ' + clinica.endereco.cidade + ', ' + clinica.endereco.estado + '. CEP: '+ clinica.endereco.cep
+                }">endereço</td>
+                <td class="p-3" th:text="${clinica.telefone.numero}">telefone</td>
 
 
                 <td class="p-3">

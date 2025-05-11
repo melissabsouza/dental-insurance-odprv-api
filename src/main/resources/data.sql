@@ -117,13 +117,13 @@ CREATE TABLE T_CHALLENGE_ATENDIMENTO (
  VALUES ('34567890000112', 'Clínica Belo Horizonte', 3, 3, 3);
 
  INSERT INTO T_CHALLENGE_PACIENTE (cpf_paciente, nome_paciente, data_nascimento, genero_paciente, cnpj_clinica, id_endereco, id_telefone)
- VALUES ('123.456.789-00', 'João Silva', DATE '1990-05-10', 'Masculino', '12345678000190', 1, 1);
+ VALUES ('123.456.789-00', 'João Silva', DATE '1990-05-10', 'MASCULINO', '12345678000190', 1, 1);
 
  INSERT INTO T_CHALLENGE_PACIENTE (cpf_paciente, nome_paciente, data_nascimento, genero_paciente, cnpj_clinica, id_endereco, id_telefone)
- VALUES ('234.567.890-01', 'Maria Oliveira', DATE '1985-08-25', 'Feminino', '23456789000101', 2, 2);
+ VALUES ('234.567.890-01', 'Maria Oliveira', DATE '1985-08-25', 'MASCULINO', '23456789000101', 2, 2);
 
  INSERT INTO T_CHALLENGE_PACIENTE (cpf_paciente, nome_paciente, data_nascimento, genero_paciente, cnpj_clinica, id_endereco, id_telefone)
- VALUES ('345.678.901-23', 'Carlos Santos', DATE '2000-01-15', 'Masculino', '34567890000112', 3, 3);
+ VALUES ('345.678.901-23', 'Carlos Santos', DATE '2000-01-15', 'MASCULINO', '34567890000112', 3, 3);
 
  INSERT INTO T_CHALLENGE_DENTISTA (cpf_dentista, nome_dentista, cro_dentista, especialidade, email_dentista, data_contratacao, cnpj_clinica, id_endereco, id_telefone)
  VALUES ('123.456.789-00', 'Dr. Pedro Alves', '12345-SP', 'Ortodontia', 'pedro.alves@email.com', DATE '2015-03-12', '12345678000190', 1, 1);
