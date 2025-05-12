@@ -17,8 +17,8 @@ public class Telefone {
     @Column(name = "id_telefone")
     private Long id;
 
-    @Pattern(regexp = "\\d{2}\\s?(9\\d{4}-\\d{4}|\\d{4}-\\d{4})",
-            message = "Use XX 9XXXX-XXXX ou XX XXXX-XXXX")
+    @Pattern(regexp = "\\d{2}\\s?(9\\d{4}-?\\d{4}|\\d{4}-?\\d{4})",
+            message = "Use XX 9XXXX-XXXX, XX 9XXXX XXXX ou XX 9XXXXXXXX")
     @Column(name = "numero_telefone", length = 15, nullable = false)
     private String numero;
 
