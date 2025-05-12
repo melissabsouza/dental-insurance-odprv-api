@@ -110,20 +110,20 @@ public class ClinicaService {
         telefone.setNumero(telefoneDTO.getNumero());
     }
 
-    public List<ClinicaDTO> findAll(){
+    public List<ClinicaDTO> findAll() {
         List<Clinica> list = clinicaRepository.findAll();
         List<ClinicaDTO> dtos = list.stream().map(this::toDto).toList();
         return dtos;
     }
 
-    public void deleteById(Long id){
+    public void deleteById(Long id) {
         System.out.println("clinica deletada");
         clinicaRepository.deleteById(id);
     }
 
-    public ClinicaDTO findById(Long id)  {
+    public ClinicaDTO findById(Long id) {
         Optional<Clinica> byId = clinicaRepository.findById(id);
-        if(byId.isPresent()){
+        if (byId.isPresent()) {
             return toDto(byId.get());
         }
         throw new RuntimeException("id não encontrado");

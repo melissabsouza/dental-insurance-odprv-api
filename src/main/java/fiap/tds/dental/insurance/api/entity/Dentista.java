@@ -24,26 +24,26 @@ public class Dentista {
 
     @NotBlank(message = "Cpf é obrigatório")
     @NotNull(message = "Cpf não pode ser nulo")
-    @Pattern(regexp= "^\\d{3}\\.?\\d{3}\\.?\\d{3}-?\\d{2}$",
-            message= "Formato de CPF inválido, use 12345678900")
+    @Pattern(regexp = "^\\d{3}\\.?\\d{3}\\.?\\d{3}-?\\d{2}$",
+            message = "Formato de CPF inválido, use 12345678900")
     @Column(name = "cpf_dentista", unique = true, nullable = false)
     private String cpf;
 
     @NotBlank(message = "Nome é obrigatório")
     @NotNull(message = "Nome não pode ser nulo")
-    @Size(min=3, message = "Nome deve ter pelo menos 3 caracteres")
+    @Size(min = 3, message = "Nome deve ter pelo menos 3 caracteres")
     @Column(name = "nome_dentista", length = 100, nullable = false)
     private String nome;
 
     @NotBlank(message = "CRO é obrigatório")
     @NotNull(message = "CRO não pode ser nulo")
-    @Size(min=5, message = "CRO deve ter pelo menos 5 caracteres")
+    @Size(min = 5, message = "CRO deve ter pelo menos 5 caracteres")
     @Column(name = "cro_dentista", length = 100, nullable = false)
     private String cro;
 
     @NotBlank(message = "Especialidade é obrigatória")
     @NotNull(message = "Especialidade não pode ser nula")
-    @Size(min=3, message = "Especialidade deve ter pelo menos 10 caracteres")
+    @Size(min = 3, message = "Especialidade deve ter pelo menos 10 caracteres")
     @Column(name = "especialidade", length = 100, nullable = false)
     private String especialidade;
 

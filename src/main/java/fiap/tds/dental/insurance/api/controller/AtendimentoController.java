@@ -36,7 +36,7 @@ public class AtendimentoController {
 
     @PostMapping
     public String salvarAtendimento(@Valid @ModelAttribute("atendimento") AtendimentoDTO atendimentoDTO,
-                                 BindingResult bindingResults, Model model) {
+                                    BindingResult bindingResults, Model model) {
         if (bindingResults.hasErrors()) {
             bindingResults.getAllErrors().forEach(e -> log.info(e.toString()));
             model.addAttribute("atendimento", atendimentoDTO);

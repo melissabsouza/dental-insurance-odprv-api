@@ -13,7 +13,7 @@
     <h1 class="text-xl font-black text-black text-center mb-4">Lista de usuarios</h1>
 
     <div class="text-center mt-8">
-        <a class="text-black mb-4" th:href="@{/usuarios/novo}" >Novo usuário</a>
+        <a class="text-black mb-4" th:href="@{/usuarios/novo}">Novo usuário</a>
     </div>
 
     <div class="p-6">
@@ -36,7 +36,8 @@
                 <td class="p-3" th:text="${usuario.status}">status</td>
 
                 <td class="p-3">
-                    <a class="text-blue-600 hover:underline" th:href="@{/usuarios/editar/{id}(id=${usuario.id})}">Editar</a>
+                    <a class="text-blue-600 hover:underline"
+                       th:href="@{/usuarios/editar/{id}(id=${usuario.id})}">Editar</a>
                     <a class="text-blue-600 hover:underline" th:href="@{/usuarios/deletar/{id}(id=${usuario.id})}">Deletar</a>
                 </td>
             </tr>

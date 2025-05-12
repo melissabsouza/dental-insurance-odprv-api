@@ -1,7 +1,6 @@
 package fiap.tds.dental.insurance.api.controller;
 
 
-
 import fiap.tds.dental.insurance.api.dto.TelefoneDTO;
 import fiap.tds.dental.insurance.api.service.TelefoneService;
 import jakarta.validation.Valid;
@@ -25,7 +24,7 @@ public class TelefoneController {
     private final TelefoneService telefoneService;
 
     @GetMapping
-    public String listarTelefones(Model model){
+    public String listarTelefones(Model model) {
         List<TelefoneDTO> lista = telefoneService.findAll();
         System.out.println("Lista de telefones: " + lista);
         model.addAttribute("telefones", lista);
@@ -33,15 +32,15 @@ public class TelefoneController {
     }
 
     @GetMapping("/novo")
-    public String novoTelefone(Model model){
+    public String novoTelefone(Model model) {
         model.addAttribute("telefone", new TelefoneDTO());
         return "telefones/formulario";
     }
 
     @PostMapping
-    public String salvarTelefone(@Valid @ModelAttribute("telefone") TelefoneDTO telefone, BindingResult bindingResults, Model model){
-        if(bindingResults.hasErrors()){
-            bindingResults.getAllErrors().forEach(e-> log.info(e.toString()));
+    public String salvarTelefone(@Valid @ModelAttribute("telefone") TelefoneDTO telefone, BindingResult bindingResults, Model model) {
+        if (bindingResults.hasErrors()) {
+            bindingResults.getAllErrors().forEach(e -> log.info(e.toString()));
             model.addAttribute("telefone", telefone);
             return "telefones/formulario";
         }
@@ -50,13 +49,13 @@ public class TelefoneController {
     }
 
     @GetMapping("/editar/{id}")
-    public String editarTelefone(@PathVariable Long id, Model model){
+    public String editarTelefone(@PathVariable Long id, Model model) {
         model.addAttribute("telefone", telefoneService.findById(id));
         return "telefones/formulario";
     }
 
     @GetMapping("/deletar/{id}")
-    public String deletarTelefone(@PathVariable Long id, Model model){
+    public String deletarTelefone(@PathVariable Long id, Model model) {
         telefoneService.deleteById(id);
         return "redirect:/telefones";
     }

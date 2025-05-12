@@ -15,7 +15,7 @@
     <h1 class="text-xl font-black text-black text-center mb-4">Lista de Endereços</h1>
 
     <div class="text-center mt-8">
-        <a class="text-black mb-4" th:href="@{/enderecos/novo}" >Novo endereço</a>
+        <a class="text-black mb-4" th:href="@{/enderecos/novo}">Novo endereço</a>
     </div>
 
     <div class="p-6">
@@ -47,8 +47,10 @@
 
 
                 <td class="p-3">
-                    <a class="text-blue-600 hover:underline" th:href="@{/templates/enderecos/editar/{id}(id=${endereco.id})}">Editar</a>
-                    <a class="text-blue-600 hover:underline" th:href="@{/templates/enderecos/deletar/{id}(id=${endereco.id})}">Deletar</a>
+                    <a class="text-blue-600 hover:underline"
+                       th:href="@{/templates/enderecos/editar/{id}(id=${endereco.id})}">Editar</a>
+                    <a class="text-blue-600 hover:underline"
+                       th:href="@{/templates/enderecos/deletar/{id}(id=${endereco.id})}">Deletar</a>
                 </td>
             </tr>
             </tbody>

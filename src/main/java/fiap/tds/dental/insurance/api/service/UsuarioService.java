@@ -22,11 +22,11 @@ public class UsuarioService {
     public UsuarioDTO saveUsuario(UsuarioDTO usuarioDTO) {
         Usuario usuario = toEntity(usuarioDTO);
 
-        if(usuarioDTO.getId()==null){
+        if (usuarioDTO.getId() == null) {
             System.out.println("Senha recebida: " + usuario.getSenha());
             System.out.println("Status antes de salvar: " + usuario.getStatus());
             usuario = usuarioRepository.save(usuario);
-        } else{
+        } else {
             UsuarioDTO byId = this.findById(usuarioDTO.getId());
             byId.setEmail(usuarioDTO.getEmail());
             byId.setSenha(usuarioDTO.getSenha());
@@ -54,7 +54,7 @@ public class UsuarioService {
 
     public UsuarioDTO findById(Long id) {
         Optional<Usuario> byId = usuarioRepository.findById(id);
-        if(byId.isPresent()) {
+        if (byId.isPresent()) {
             return toDto(byId.get());
         }
         throw new RuntimeException("id nao encontrado");

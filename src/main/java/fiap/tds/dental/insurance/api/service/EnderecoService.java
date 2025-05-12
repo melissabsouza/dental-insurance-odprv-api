@@ -20,9 +20,9 @@ public class EnderecoService {
     public EnderecoDTO salvarEndereco(EnderecoDTO enderecoDTO) {
         Endereco endereco = toEntity(enderecoDTO);
 
-        if(enderecoDTO.getId() == null){
+        if (enderecoDTO.getId() == null) {
             endereco = enderecoRepository.save(endereco);
-        }else{
+        } else {
             EnderecoDTO byId = this.findById(enderecoDTO.getId());
             byId.setNumero(enderecoDTO.getNumero());
             byId.setBairro(enderecoDTO.getBairro());
@@ -37,25 +37,24 @@ public class EnderecoService {
         return toDto(endereco);
     }
 
-    public List<EnderecoDTO> findAll(){
+    public List<EnderecoDTO> findAll() {
         List<Endereco> list = enderecoRepository.findAll();
         List<EnderecoDTO> dtos = list.stream().map(EnderecoService::toDto).toList();
         return dtos;
     }
 
-    public void deleteById(Long id){
+    public void deleteById(Long id) {
         System.out.println("endereco deletado");
         enderecoRepository.deleteById(id);
     }
 
-    public EnderecoDTO findById(Long id){
+    public EnderecoDTO findById(Long id) {
         Optional<Endereco> byId = enderecoRepository.findById(id);
-        if(byId.isPresent()){
+        if (byId.isPresent()) {
             return toDto(byId.get());
         }
         throw new RuntimeException("id não encontrado");
     }
-
 
 
     public Endereco toEntity(EnderecoDTO dto) {
@@ -85,7 +84,6 @@ public class EnderecoService {
             return enderecoRepository.save(novo);
         }
     }
-
 
 
     public static EnderecoDTO toDto(Endereco endereco) {

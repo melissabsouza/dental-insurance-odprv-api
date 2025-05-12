@@ -41,8 +41,8 @@ public class UsuarioController {
 
     @PostMapping
     public String salvarUsuario(@Valid @ModelAttribute("usuario") UsuarioDTO usuario, BindingResult bindingResults, Model model) {
-        if (bindingResults.hasErrors()){
-            bindingResults.getAllErrors().forEach(e-> log.info(e.toString()));
+        if (bindingResults.hasErrors()) {
+            bindingResults.getAllErrors().forEach(e -> log.info(e.toString()));
             model.addAttribute("usuario", usuario);
             return "usuarios/formulario";
         }

@@ -29,9 +29,9 @@ public class AtendimentoService {
     public AtendimentoDTO salvarAtendimento(AtendimentoDTO atendimentoDTO) {
         Atendimento atendimento;
 
-        if(atendimentoDTO.getId() == null) {
+        if (atendimentoDTO.getId() == null) {
             atendimento = new Atendimento();
-        } else{
+        } else {
             atendimento = atendimentoRepository.findById(atendimentoDTO.getId())
                     .orElseThrow(() -> new RuntimeException("Atendimento não encontrado"));
 
@@ -42,13 +42,13 @@ public class AtendimentoService {
         atendimento.setTipoProcedimento(atendimentoDTO.getTipoProcedimento());
         atendimento.setCustoEstimado(atendimentoDTO.getCustoEstimado());
 
-        if(atendimentoDTO.getPacienteCpf() == null) {
+        if (atendimentoDTO.getPacienteCpf() == null) {
             Paciente paciente = pacienteRepository.findByCpf(atendimentoDTO.getPacienteCpf())
                     .orElseThrow(() -> new RuntimeException("paciente não encontrado com cpf: " + atendimentoDTO.getPacienteCpf()));
             atendimento.setPaciente(paciente);
         }
 
-        if(atendimentoDTO.getDentistaCpf() == null) {
+        if (atendimentoDTO.getDentistaCpf() == null) {
             Dentista dentista = dentistaRepository.findByCpf(atendimentoDTO.getDentistaCpf())
                     .orElseThrow(() -> new RuntimeException("dentista não encontrado com cpf: " + atendimentoDTO.getDentistaCpf()));
             atendimento.setDentista(dentista);
@@ -64,13 +64,13 @@ public class AtendimentoService {
         return dtos;
     }
 
-    public void deleteById(Long id){
+    public void deleteById(Long id) {
         atendimentoRepository.deleteById(id);
     }
 
     public AtendimentoDTO findById(Long id) {
         Optional<Atendimento> byId = atendimentoRepository.findById(id);
-        if(byId.isPresent()){
+        if (byId.isPresent()) {
             return toDto(byId.get());
         }
         throw new RuntimeException("id não encontrado");
@@ -85,11 +85,11 @@ public class AtendimentoService {
         atendimentoDTO.setTipoProcedimento(atendimento.getTipoProcedimento());
         atendimentoDTO.setCustoEstimado(atendimento.getCustoEstimado());
 
-        if(atendimento.getPaciente() != null) {
+        if (atendimento.getPaciente() != null) {
             atendimentoDTO.setPacienteCpf(atendimento.getPaciente().getCpf());
         }
 
-        if(atendimento.getDentista() != null) {
+        if (atendimento.getDentista() != null) {
             atendimentoDTO.setDentistaCpf(atendimento.getDentista().getCpf());
         }
         return atendimentoDTO;

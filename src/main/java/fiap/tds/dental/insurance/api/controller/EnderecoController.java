@@ -23,7 +23,7 @@ public class EnderecoController {
     private final EnderecoService enderecoService;
 
     @GetMapping
-    public String listarEnderecos(Model model){
+    public String listarEnderecos(Model model) {
         List<EnderecoDTO> lista = enderecoService.findAll();
         System.out.println("Lista de enderecos: " + lista);
         model.addAttribute("enderecos", lista);
@@ -31,15 +31,15 @@ public class EnderecoController {
     }
 
     @GetMapping("/novo")
-    public String novoEndereco(Model model){
+    public String novoEndereco(Model model) {
         model.addAttribute("endereco", new EnderecoDTO());
         return "enderecos/formulario";
     }
 
     @PostMapping
-    public String salvarEndereco(@Valid @ModelAttribute("endereco") EnderecoDTO endereco, BindingResult bindingResults, Model model){
-        if(bindingResults.hasErrors()){
-            bindingResults.getAllErrors().forEach(e-> log.info(e.toString()));
+    public String salvarEndereco(@Valid @ModelAttribute("endereco") EnderecoDTO endereco, BindingResult bindingResults, Model model) {
+        if (bindingResults.hasErrors()) {
+            bindingResults.getAllErrors().forEach(e -> log.info(e.toString()));
             model.addAttribute("endereco", endereco);
             return "enderecos/formulario";
         }
@@ -48,13 +48,13 @@ public class EnderecoController {
     }
 
     @GetMapping("/editar/{id}")
-    public String editarEndereco(@PathVariable Long id, Model model){
+    public String editarEndereco(@PathVariable Long id, Model model) {
         model.addAttribute("endereco", enderecoService.findById(id));
         return "enderecos/formulario";
     }
 
     @GetMapping("/deletar/{id}")
-    public String deletarEndereco(@PathVariable Long id, Model model){
+    public String deletarEndereco(@PathVariable Long id, Model model) {
         enderecoService.deleteById(id);
         return "redirect:/enderecos";
     }

@@ -24,14 +24,14 @@ public class Paciente {
 
     @NotBlank(message = "Cpf é obrigatório")
     @NotNull(message = "Cpf não pode ser nulo")
-    @Pattern(regexp= "^\\d{3}\\.?\\d{3}\\.?\\d{3}-?\\d{2}$",
-            message= "Formato de CPF inválido, use 12345678900")
+    @Pattern(regexp = "^\\d{3}\\.?\\d{3}\\.?\\d{3}-?\\d{2}$",
+            message = "Formato de CPF inválido, use 12345678900")
     @Column(name = "cpf_paciente", unique = true, nullable = false)
     private String cpf;
 
     @NotBlank(message = "Nome é obrigatório")
     @NotNull(message = "Nome não pode ser nulo")
-    @Size(min=3, message = "Nome deve ter pelo menos 3 caracteres")
+    @Size(min = 3, message = "Nome deve ter pelo menos 3 caracteres")
     @Column(name = "nome_paciente", length = 100, nullable = false)
     private String nome;
 

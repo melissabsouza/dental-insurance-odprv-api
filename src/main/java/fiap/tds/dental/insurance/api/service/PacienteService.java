@@ -30,10 +30,10 @@ public class PacienteService {
     public PacienteDTO salvarPaciente(PacienteDTO pacienteDTO) {
         Paciente paciente;
 
-        if(pacienteDTO.getId() == null){
+        if (pacienteDTO.getId() == null) {
             paciente = new Paciente();
 
-            if(pacienteRepository.existsByCpf(pacienteDTO.getCpf())) {
+            if (pacienteRepository.existsByCpf(pacienteDTO.getCpf())) {
                 throw new RuntimeException("Já existe um paciente com esse CPF");
             }
         } else {
@@ -72,19 +72,19 @@ public class PacienteService {
         return dtos;
     }
 
-    public void deleteById(Long id){
+    public void deleteById(Long id) {
         pacienteRepository.deleteById(id);
     }
 
     public PacienteDTO findById(Long id) {
         Optional<Paciente> byId = pacienteRepository.findById(id);
-        if(byId.isPresent()){
+        if (byId.isPresent()) {
             return toDto(byId.get());
         }
         throw new RuntimeException("id não encontrado");
     }
 
-    private Paciente toEntity(PacienteDTO pacienteDTO){
+    private Paciente toEntity(PacienteDTO pacienteDTO) {
         Paciente paciente = new Paciente();
         paciente.setId(pacienteDTO.getId());
         paciente.setCpf(pacienteDTO.getCpf());
@@ -104,7 +104,7 @@ public class PacienteService {
 
     }
 
-    private PacienteDTO toDto(Paciente paciente){
+    private PacienteDTO toDto(Paciente paciente) {
         PacienteDTO pacienteDTO = new PacienteDTO();
         pacienteDTO.setId(paciente.getId());
         pacienteDTO.setCpf(paciente.getCpf());

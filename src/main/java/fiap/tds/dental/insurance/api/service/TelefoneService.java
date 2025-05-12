@@ -17,14 +17,14 @@ public class TelefoneService {
     @Autowired
     private final TelefoneRepository telefoneRepository;
 
-    public TelefoneDTO saveTelefone(TelefoneDTO telefoneDTO){
+    public TelefoneDTO saveTelefone(TelefoneDTO telefoneDTO) {
         Telefone telefone = toEntity(telefoneDTO);
 
-        if(telefoneDTO.getId()==null){
+        if (telefoneDTO.getId() == null) {
             System.out.println(telefone.getNumero());
 
             telefone = telefoneRepository.save(telefone);
-        } else{
+        } else {
             TelefoneDTO byId = this.findById(telefoneDTO.getId());
             byId.setNumero(telefoneDTO.getNumero());
             byId.setTipo(telefoneDTO.getTipo());
@@ -36,20 +36,20 @@ public class TelefoneService {
         return toDto(telefone);
     }
 
-    public List<TelefoneDTO> findAll(){
+    public List<TelefoneDTO> findAll() {
         List<Telefone> list = telefoneRepository.findAll();
         List<TelefoneDTO> dtos = list.stream().map(this::toDto).toList();
         return dtos;
     }
 
-    public void deleteById(Long id){
+    public void deleteById(Long id) {
         System.out.println("telefone deletado");
         telefoneRepository.deleteById(id);
     }
 
-    public TelefoneDTO findById(Long id){
+    public TelefoneDTO findById(Long id) {
         Optional<Telefone> byId = telefoneRepository.findById(id);
-        if(byId.isPresent()){
+        if (byId.isPresent()) {
             return toDto(byId.get());
         }
         throw new RuntimeException("id não encontrado");
@@ -71,7 +71,7 @@ public class TelefoneService {
         return telefoneRepository.save(novo); // <- importante
     }
 
-    public TelefoneDTO toDto(Telefone telefone){
+    public TelefoneDTO toDto(Telefone telefone) {
         TelefoneDTO telefoneDTO = new TelefoneDTO();
         telefoneDTO.setId(telefone.getId());
         telefoneDTO.setNumero(telefone.getNumero());

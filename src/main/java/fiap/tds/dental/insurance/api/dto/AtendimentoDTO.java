@@ -30,14 +30,14 @@ public class AtendimentoDTO {
 
     @NotBlank(message = "Cpf é obrigatório")
     @NotNull(message = "Cpf não pode ser nulo")
-    @Pattern(regexp= "^\\d{3}\\.?\\d{3}\\.?\\d{3}-?\\d{2}$",
-            message= "Formato de CPF inválido, use 12345678900")
+    @Pattern(regexp = "^\\d{3}\\.?\\d{3}\\.?\\d{3}-?\\d{2}$",
+            message = "Formato de CPF inválido, use 12345678900")
     private String pacienteCpf;
 
     @NotBlank(message = "Cpf é obrigatório")
     @NotNull(message = "Cpf não pode ser nulo")
-    @Pattern(regexp= "^\\d{3}\\.?\\d{3}\\.?\\d{3}-?\\d{2}$",
-            message= "Formato de CPF inválido, use 12345678900")
+    @Pattern(regexp = "^\\d{3}\\.?\\d{3}\\.?\\d{3}-?\\d{2}$",
+            message = "Formato de CPF inválido, use 12345678900")
     private String dentistaCpf;
 
 }

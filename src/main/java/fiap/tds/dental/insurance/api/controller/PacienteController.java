@@ -35,7 +35,7 @@ public class PacienteController {
 
     @PostMapping
     public String salvarPaciente(@Valid @ModelAttribute("paciente") PacienteDTO pacienteDTO,
-                                BindingResult bindingResults, Model model) {
+                                 BindingResult bindingResults, Model model) {
         if (bindingResults.hasErrors()) {
             bindingResults.getAllErrors().forEach(e -> log.info(e.toString()));
             model.addAttribute("paciente", pacienteDTO);

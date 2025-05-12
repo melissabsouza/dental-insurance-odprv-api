@@ -26,17 +26,17 @@ public class DentistaService {
     public DentistaDTO salvarDentista(DentistaDTO dentistaDTO) {
         Dentista dentista;
 
-        if(dentistaDTO.getId()==null){
+        if (dentistaDTO.getId() == null) {
             dentista = new Dentista();
 
-            if(dentistaRepository.existsByCpf(dentistaDTO.getCpf())){
+            if (dentistaRepository.existsByCpf(dentistaDTO.getCpf())) {
                 throw new RuntimeException("Já existe um dentista com esse CPF");
             }
-        } else{
+        } else {
             dentista = dentistaRepository.findById(dentistaDTO.getId())
                     .orElseThrow(() -> new RuntimeException("Dentista não encontrado"));
 
-            if(!dentista.getCpf().equals(dentistaDTO.getCpf())){
+            if (!dentista.getCpf().equals(dentistaDTO.getCpf())) {
                 throw new RuntimeException("Já existe um dentista com este CPF");
             }
         }
@@ -71,13 +71,13 @@ public class DentistaService {
         return dtos;
     }
 
-    public void deleteById(Long id){
+    public void deleteById(Long id) {
         dentistaRepository.deleteById(id);
     }
 
     public DentistaDTO findById(Long id) {
         Optional<Dentista> byId = dentistaRepository.findById(id);
-        if(byId.isPresent()){
+        if (byId.isPresent()) {
             return toDto(byId.get());
         }
         throw new RuntimeException("id não encontrado");

@@ -10,7 +10,7 @@ import lombok.Data;
 @Data
 public class UsuarioDTO {
     private Long id;
-    
+
     @NotBlank(message = "O email é obrigatório")
     private String email;
 
