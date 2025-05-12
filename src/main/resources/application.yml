@@ -63,6 +63,9 @@ spring:
     encoding: UTF-8
     basename: messages
 
+  mvc:
+    locale: pt_BR
+    locale-resolver: session
   h2:
     console:
       enabled: true
@@ -71,6 +74,9 @@ spring:
   devtools:
     restart:
       enabled: true
+  integration:
+    poller:
+      max-messages-per-poll:
 
 logging:
   level:
