@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Cadastro de Clínicas</title>
@@ -15,10 +15,12 @@
 <body class="flex justify-center items-center min-h-screen bg-gray-100 p-10">
 
 <div class="bg-white p-8 rounded-2xl shadow-xl border border-gray-300 w-full max-w-4xl">
-    <div class="flex flex-col items-center">
-        <h2 class="text-2xl font-extrabold mb-2" style="color: var(--cor--azul);">Cadastro de Clínicas</h2>
-        <a class="text-sm hover:underline mb-6 flex items-center gap-1" style="color: var(--cor--azul);" th:href="@{/clinicas}">
-            <svg class="w-4 h-4" stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+    <div class="flex flex-col items-center mb-6">
+        <h2 th:text= "#{clinicas.title}" class="text-2xl font-extrabold mb-2 text-blue-700">Cadastro de Pacientes</h2>
+        <a th:text= "#{clinicas.list}" class="text-sm hover:underline text-blue-700 flex items-center gap-1" th:href="@{/pacientes}">
+            <svg class="w-4 h-4" stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24">
+                <path d="M3 12h18M3 6h18M3 18h18"/>
+            </svg>
             Lista de Clínicas
         </a>
     </div>
@@ -37,19 +39,19 @@
         </div>
 
         <div class="flex flex-col">
-            <label for="nome" class="block font-medium">Nome</label>
+            <label th:text= "#{name.form}" for="nome" class="block font-medium">Nome</label>
             <input type="text" id="nome" th:field="*{nome}" class="mt-1 w-full p-2 border rounded-lg border-gray-300" required/>
             <li th:each="err : ${#fields.errors('nome')}" th:text="${err}" class="text-red-500 text-sm mt-1"></li>
         </div>
 
         <div class="flex flex-col">
-            <label for="telefone" class="block font-medium">Telefone</label>
+            <label th:text= "#{telefone.text}" for="telefone" class="block font-medium">Telefone</label>
             <input type="text" id="telefone" th:field="*{telefone.numero}" class="mt-1 w-full p-2 border rounded-lg border-gray-300" required/>
             <li th:each="err : ${#fields.errors('telefone.numero')}" th:text="${err}" class="text-red-500 text-sm mt-1"></li>
         </div>
 
         <div class="flex flex-col">
-            <label for="tipo" class="block font-medium">Tipo</label>
+            <label th:text= "#{telefone.tipo}" for="tipo" class="block font-medium">Tipo</label>
             <select th:field="*{telefone.tipo}" class="mt-1 w-full p-2 border rounded-lg border-gray-300">
                 <option th:value="null" disabled selected>Selecione o tipo</option>
                 <option th:value="COMERCIAL">Comercial</option>
@@ -66,7 +68,7 @@
         </div>
 
         <div class="flex flex-col">
-            <label for="senha" class="block font-medium">Senha</label>
+            <label th:text= "#{clinicas.senha}" for="senha" class="block font-medium">Senha</label>
             <input type="password" id="senha" th:field="*{usuario.senha}" class="mt-1 w-full p-2 border rounded-lg border-gray-300" required/>
             <li th:each="err : ${#fields.errors('usuario.senha')}" th:text="${err}" class="text-red-500 text-sm mt-1"></li>
         </div>
@@ -82,16 +84,16 @@
         </div>
 
         <div class="flex flex-col col-span-2">
-            <h3 class="text-xl font-semibold mb-2">Endereço</h3>
-            <label for="rua" class="block font-medium">Rua</label>
+            <h3 th:text= "#{enderecos.text}" class="text-xl font-semibold mb-2">Endereço</h3>
+            <label th:text= "#{enderecos.rua}" for="rua" class="block font-medium">Rua</label>
             <input type="text" id="rua" th:field="*{endereco.rua}" class="mt-1 w-full p-2 border rounded-lg border-gray-300" required/>
             <li th:each="err : ${#fields.errors('endereco.rua')}" th:text="${err}" class="text-red-500 text-sm mt-1"></li>
 
-            <label for="numero" class="block font-medium mt-2">Número</label>
+            <label th:text= "#{enderecos.numero}" for="numero" class="block font-medium mt-2">Número</label>
             <input type="text" id="numero" th:field="*{endereco.numero}" class="mt-1 w-full p-2 border rounded-lg border-gray-300" required/>
             <li th:each="err : ${#fields.errors('endereco.numero')}" th:text="${err}" class="text-red-500 text-sm mt-1"></li>
 
-            <label for="bairro" class="block font-medium mt-2">Bairro</label>
+            <label th:text= "#{enderecos.bairro}" for="bairro" class="block font-medium mt-2">Bairro</label>
             <input type="text" id="bairro" th:field="*{endereco.bairro}" class="mt-1 w-full p-2 border rounded-lg border-gray-300" required/>
             <li th:each="err : ${#fields.errors('endereco.bairro')}" th:text="${err}" class="text-red-500 text-sm mt-1"></li>
 
@@ -99,22 +101,22 @@
             <input type="text" id="cep" th:field="*{endereco.cep}" class="mt-1 w-full p-2 border rounded-lg border-gray-300" required/>
             <li th:each="err : ${#fields.errors('endereco.cep')}" th:text="${err}" class="text-red-500 text-sm mt-1"></li>
 
-            <label for="cidade" class="block font-medium mt-2">Cidade</label>
+            <label th:text= "#{enderecos.cidade}" for="cidade" class="block font-medium mt-2">Cidade</label>
             <input type="text" id="cidade" th:field="*{endereco.cidade}" class="mt-1 w-full p-2 border rounded-lg border-gray-300" required/>
             <li th:each="err : ${#fields.errors('endereco.cidade')}" th:text="${err}" class="text-red-500 text-sm mt-1"></li>
 
-            <label for="estado" class="block font-medium mt-2">Estado</label>
+            <label th:text= "#{enderecos.estado}" for="estado" class="block font-medium mt-2">Estado</label>
             <input type="text" id="estado" th:field="*{endereco.estado}" class="mt-1 w-full p-2 border rounded-lg border-gray-300" required/>
             <li th:each="err : ${#fields.errors('endereco.estado')}" th:text="${err}" class="text-red-500 text-sm mt-1"></li>
 
-            <label for="complemento" class="block font-medium mt-2">Complemento</label>
+            <label th:text= "#{enderecos.complemento}" for="complemento" class="block font-medium mt-2">Complemento</label>
             <input type="text" id="complemento" th:field="*{endereco.complemento}" class="mt-1 w-full p-2 border rounded-lg border-gray-300"/>
             <li th:each="err : ${#fields.errors('endereco.complemento')}" th:text="${err}" class="text-red-500 text-sm mt-1"></li>
 
         </div>
 
         <div class="flex justify-center mt-6 col-span-2">
-            <button type="submit" class="px-6 py-2 rounded-lg text-white transition-colors" style="background-color: var(--cor-vermelho);">
+            <button th:text= "#{save.button}" type="submit" class="px-6 py-2 rounded-lg text-white transition-colors" style="background-color: var(--cor-vermelho);">
                 Salvar
             </button>
         </div>
