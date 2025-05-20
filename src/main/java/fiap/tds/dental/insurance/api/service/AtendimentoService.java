@@ -2,8 +2,6 @@ package fiap.tds.dental.insurance.api.service;
 
 import fiap.tds.dental.insurance.api.dto.AtendimentoDTO;
 import fiap.tds.dental.insurance.api.entity.Atendimento;
-import fiap.tds.dental.insurance.api.entity.Dentista;
-import fiap.tds.dental.insurance.api.entity.Paciente;
 import fiap.tds.dental.insurance.api.repository.AtendimentoRepository;
 import fiap.tds.dental.insurance.api.repository.DentistaRepository;
 import fiap.tds.dental.insurance.api.repository.PacienteRepository;
@@ -29,12 +27,11 @@ public class AtendimentoService {
     public AtendimentoDTO salvarAtendimento(AtendimentoDTO atendimentoDTO) {
         Atendimento atendimento;
 
-        if (atendimentoDTO.getId() == null) {
+        if (atendimentoDTO.getId() == null || atendimentoDTO.getId().isBlank()) {
             atendimento = new Atendimento();
         } else {
             atendimento = atendimentoRepository.findById(atendimentoDTO.getId())
                     .orElseThrow(() -> new RuntimeException("Atendimento não encontrado"));
-
         }
 
         atendimento.setDataAtendimento(atendimentoDTO.getDataAtendimento());
@@ -43,15 +40,15 @@ public class AtendimentoService {
         atendimento.setCustoEstimado(atendimentoDTO.getCustoEstimado());
 
         if (atendimentoDTO.getPacienteCpf() != null) {
-            Paciente paciente = pacienteRepository.findByCpf(atendimentoDTO.getPacienteCpf())
-                    .orElseThrow(() -> new RuntimeException("paciente não encontrado com cpf: " + atendimentoDTO.getPacienteCpf()));
-            atendimento.setPaciente(paciente);
+            pacienteRepository.findByCpf(atendimentoDTO.getPacienteCpf())
+                    .orElseThrow(() -> new RuntimeException("Paciente não encontrado com cpf: " + atendimentoDTO.getPacienteCpf()));
+            atendimento.setPacienteCpf(atendimentoDTO.getPacienteCpf());
         }
 
         if (atendimentoDTO.getDentistaCpf() != null) {
-            Dentista dentista = dentistaRepository.findByCpf(atendimentoDTO.getDentistaCpf())
-                    .orElseThrow(() -> new RuntimeException("dentista não encontrado com cpf: " + atendimentoDTO.getDentistaCpf()));
-            atendimento.setDentista(dentista);
+            dentistaRepository.findByCpf(atendimentoDTO.getDentistaCpf())
+                    .orElseThrow(() -> new RuntimeException("Dentista não encontrado com cpf: " + atendimentoDTO.getDentistaCpf()));
+            atendimento.setDentistaCpf(atendimentoDTO.getDentistaCpf());
         }
 
         atendimento = atendimentoRepository.save(atendimento);
@@ -64,11 +61,11 @@ public class AtendimentoService {
         return dtos;
     }
 
-    public void deleteById(Long id) {
+    public void deleteById(String id) {
         atendimentoRepository.deleteById(id);
     }
 
-    public AtendimentoDTO findById(Long id) {
+    public AtendimentoDTO findById(String id) {
         Optional<Atendimento> byId = atendimentoRepository.findById(id);
         if (byId.isPresent()) {
             return toDto(byId.get());
@@ -85,13 +82,14 @@ public class AtendimentoService {
         atendimentoDTO.setTipoProcedimento(atendimento.getTipoProcedimento());
         atendimentoDTO.setCustoEstimado(atendimento.getCustoEstimado());
 
-        if (atendimento.getPaciente() != null) {
-            atendimentoDTO.setPacienteCpf(atendimento.getPaciente().getCpf());
+        if (atendimento.getPacienteCpf() != null) {
+            atendimentoDTO.setPacienteCpf(atendimento.getPacienteCpf());
         }
 
-        if (atendimento.getDentista() != null) {
-            atendimentoDTO.setDentistaCpf(atendimento.getDentista().getCpf());
+        if (atendimento.getDentistaCpf() != null) {
+            atendimentoDTO.setDentistaCpf(atendimento.getDentistaCpf());
         }
+
         return atendimentoDTO;
     }
 }

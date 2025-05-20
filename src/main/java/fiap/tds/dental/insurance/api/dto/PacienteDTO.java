@@ -1,9 +1,9 @@
 package fiap.tds.dental.insurance.api.dto;
 
 import fiap.tds.dental.insurance.api.enums.TipoGenero;
-import jakarta.persistence.Column;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
@@ -11,12 +11,11 @@ import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 @Data
 public class PacienteDTO {
 
-    private Long id;
+    private String id;
 
     @NotBlank(message = "Cpf é obrigatório")
     @NotNull(message = "Cpf não pode ser nulo")
@@ -38,8 +37,10 @@ public class PacienteDTO {
 
     @Pattern(regexp = "([0-9]{2}[\\.]?[0-9]{3}[\\.]?[0-9]{3}[\\/]?[0-9]{4}[-]?[0-9]{2})",
             message = "Use 00.000.000/0000-00 or 00000000000000")
+    @Valid
     private String clinicaCnpj;
-
+    @Valid
     private EnderecoDTO endereco;
+    @Valid
     private TelefoneDTO telefone;
 }

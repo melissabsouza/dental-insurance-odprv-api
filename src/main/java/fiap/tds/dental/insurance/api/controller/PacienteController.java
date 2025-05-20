@@ -54,14 +54,14 @@ public class PacienteController {
     }
 
     @GetMapping("/editar/{id}")
-    public String editarPaciente(@PathVariable Long id, Model model) {
+    public String editarPaciente(@PathVariable String id, Model model) {
         PacienteDTO pacienteDTO = pacienteService.findById(id);
         model.addAttribute("paciente", pacienteDTO);
         return "pacientes/formulario";
     }
 
     @GetMapping("/deletar/{id}")
-    public String deletarPaciente(@PathVariable Long id, Model model) {
+    public String deletarPaciente(@PathVariable String id, Model model) {
         pacienteService.deleteById(id);
         return "redirect:/pacientes";
     }

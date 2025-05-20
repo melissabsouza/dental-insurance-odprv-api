@@ -1,7 +1,6 @@
 package fiap.tds.dental.insurance.api.service;
 
 import fiap.tds.dental.insurance.api.dto.PacienteDTO;
-import fiap.tds.dental.insurance.api.entity.Clinica;
 import fiap.tds.dental.insurance.api.entity.Endereco;
 import fiap.tds.dental.insurance.api.entity.Paciente;
 import fiap.tds.dental.insurance.api.entity.Telefone;
@@ -30,7 +29,7 @@ public class PacienteService {
     public PacienteDTO salvarPaciente(PacienteDTO pacienteDTO) {
         Paciente paciente;
 
-        if (pacienteDTO.getId() == null) {
+        if (pacienteDTO.getId() == null || pacienteDTO.getId().isBlank()) {
             paciente = new Paciente();
 
             if (pacienteRepository.existsByCpf(pacienteDTO.getCpf())) {
@@ -51,9 +50,10 @@ public class PacienteService {
         paciente.setGenero(pacienteDTO.getGenero());
 
         if (pacienteDTO.getClinicaCnpj() != null) {
-            Clinica clinica = clinicaRepository.findByCnpj(pacienteDTO.getClinicaCnpj())
-                    .orElseThrow(() -> new RuntimeException("Clinica não encontrada com cnpj: " + pacienteDTO.getClinicaCnpj()));
-            paciente.setClinica(clinica);
+            if (!clinicaRepository.existsByCnpj(pacienteDTO.getClinicaCnpj())) {
+                throw new RuntimeException("Clínica não encontrada com cnpj: " + pacienteDTO.getClinicaCnpj());
+            }
+            paciente.setClinicaCnpj(pacienteDTO.getClinicaCnpj());
         }
 
         Endereco endereco = enderecoService.toEntity(pacienteDTO.getEndereco());
@@ -72,11 +72,11 @@ public class PacienteService {
         return dtos;
     }
 
-    public void deleteById(Long id) {
+    public void deleteById(String id) {
         pacienteRepository.deleteById(id);
     }
 
-    public PacienteDTO findById(Long id) {
+    public PacienteDTO findById(String id) {
         Optional<Paciente> byId = pacienteRepository.findById(id);
         if (byId.isPresent()) {
             return toDto(byId.get());
@@ -96,9 +96,10 @@ public class PacienteService {
         paciente.setTelefone(telefoneService.toEntity(pacienteDTO.getTelefone()));
 
         if (pacienteDTO.getClinicaCnpj() != null) {
-            Clinica clinica = clinicaRepository.findByCnpj(pacienteDTO.getClinicaCnpj())
-                    .orElseThrow(() -> new RuntimeException("Clinica não encontrada com cnpj: " + pacienteDTO.getClinicaCnpj()));
-            paciente.setClinica(clinica);
+            if (!clinicaRepository.existsByCnpj(pacienteDTO.getClinicaCnpj())) {
+                throw new RuntimeException("Clínica não encontrada com cnpj: " + pacienteDTO.getClinicaCnpj());
+            }
+            paciente.setClinicaCnpj(pacienteDTO.getClinicaCnpj());
         }
         return paciente;
 
@@ -112,12 +113,13 @@ public class PacienteService {
         pacienteDTO.setDataNascimento(paciente.getDataNascimento());
         pacienteDTO.setGenero(paciente.getGenero());
 
-        pacienteDTO.setEndereco(EnderecoService.toDto(paciente.getEndereco()));
+        pacienteDTO.setEndereco(enderecoService.toDto(paciente.getEndereco()));
         pacienteDTO.setTelefone(telefoneService.toDto(paciente.getTelefone()));
 
-        if (paciente.getClinica() != null) {
-            pacienteDTO.setClinicaCnpj(paciente.getClinica().getCnpj());
+        if (paciente.getClinicaCnpj() != null) {
+            pacienteDTO.setClinicaCnpj(paciente.getClinicaCnpj());
         }
+
 
         return pacienteDTO;
     }

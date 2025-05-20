@@ -1,15 +1,15 @@
 package fiap.tds.dental.insurance.api.dto;
 
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
 import lombok.Data;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Data
 public class AtendimentoDTO {
-    private Long id;
+    private String id;
 
     @Size(min = 3, message = "O procedimento deve ter pelo menos 5 caracteres")
     @NotBlank(message = "O procedimento não pode ser vazio")
@@ -32,12 +32,14 @@ public class AtendimentoDTO {
     @NotNull(message = "Cpf não pode ser nulo")
     @Pattern(regexp = "^\\d{3}\\.?\\d{3}\\.?\\d{3}-?\\d{2}$",
             message = "Formato de CPF inválido, use 12345678900")
+    @Valid
     private String pacienteCpf;
 
     @NotBlank(message = "Cpf é obrigatório")
     @NotNull(message = "Cpf não pode ser nulo")
     @Pattern(regexp = "^\\d{3}\\.?\\d{3}\\.?\\d{3}-?\\d{2}$",
             message = "Formato de CPF inválido, use 12345678900")
+    @Valid
     private String dentistaCpf;
 
 }

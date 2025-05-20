@@ -6,12 +6,14 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
+import org.springframework.data.mongodb.core.index.Indexed;
 
 @Data
 public class UsuarioDTO {
-    private Long id;
+    private String id;
 
     @NotBlank(message = "O email é obrigatório")
+    @Indexed(unique = true)
     private String email;
 
     @NotNull(message = "senha não pode ser nula")

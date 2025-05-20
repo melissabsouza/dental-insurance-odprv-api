@@ -64,14 +64,14 @@ public class ClinicaController {
     }
 
     @GetMapping("/editar/{id}")
-    public String editarClinica(@PathVariable Long id, Model model) {
+    public String editarClinica(@PathVariable String  id, Model model) {
         ClinicaDTO clinicaDTO = clinicaService.findById(id);
         model.addAttribute("clinica", clinicaDTO);
         return "clinicas/formulario";
     }
 
     @GetMapping("/deletar/{id}")
-    public String deletarClinica(@PathVariable Long id, Model model) {
+    public String deletarClinica(@PathVariable String  id, Model model) {
         clinicaService.deleteById(id);
         return "redirect:/clinicas";
     }

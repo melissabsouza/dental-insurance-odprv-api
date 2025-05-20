@@ -9,7 +9,7 @@ import lombok.Data;
 @Data
 public class TelefoneDTO {
 
-    private Long id;
+    private String id;
 
     @Pattern(regexp = "\\d{2}\\s?(9\\d{4}-?\\d{4}|\\d{4}-?\\d{4})",
             message = "Use XX 9XXXX-XXXX, XX 9XXXX XXXX ou XX 9XXXXXXXX")

@@ -1,9 +1,6 @@
 package fiap.tds.dental.insurance.api.controller;
 
 import fiap.tds.dental.insurance.api.dto.DentistaDTO;
-import fiap.tds.dental.insurance.api.dto.EnderecoDTO;
-import fiap.tds.dental.insurance.api.dto.PacienteDTO;
-import fiap.tds.dental.insurance.api.dto.TelefoneDTO;
 import fiap.tds.dental.insurance.api.service.DentistaService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -59,14 +56,14 @@ public class DentistaController {
     }
 
     @GetMapping("/editar/{id}")
-    public String editarDentista(@PathVariable Long id, Model model) {
+    public String editarDentista(@PathVariable String id, Model model) {
         DentistaDTO dentistaDTO = dentistaService.findById(id);
         model.addAttribute("dentista", dentistaDTO);
         return "dentistas/formulario";
     }
 
     @GetMapping("/deletar/{id}")
-    public String deletarDentista(@PathVariable Long id, Model model) {
+    public String deletarDentista(@PathVariable String id, Model model) {
         dentistaService.deleteById(id);
         return "redirect:/dentistas";
     }

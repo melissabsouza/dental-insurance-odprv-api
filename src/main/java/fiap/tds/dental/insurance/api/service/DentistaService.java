@@ -1,7 +1,9 @@
 package fiap.tds.dental.insurance.api.service;
 
 import fiap.tds.dental.insurance.api.dto.DentistaDTO;
-import fiap.tds.dental.insurance.api.entity.*;
+import fiap.tds.dental.insurance.api.entity.Dentista;
+import fiap.tds.dental.insurance.api.entity.Endereco;
+import fiap.tds.dental.insurance.api.entity.Telefone;
 import fiap.tds.dental.insurance.api.repository.ClinicaRepository;
 import fiap.tds.dental.insurance.api.repository.DentistaRepository;
 import lombok.AllArgsConstructor;
@@ -26,7 +28,7 @@ public class DentistaService {
     public DentistaDTO salvarDentista(DentistaDTO dentistaDTO) {
         Dentista dentista;
 
-        if (dentistaDTO.getId() == null) {
+        if (dentistaDTO.getId() == null || dentistaDTO.getId().isBlank()) {
             dentista = new Dentista();
 
             if (dentistaRepository.existsByCpf(dentistaDTO.getCpf())) {
@@ -36,7 +38,7 @@ public class DentistaService {
             dentista = dentistaRepository.findById(dentistaDTO.getId())
                     .orElseThrow(() -> new RuntimeException("Dentista não encontrado"));
 
-            if (!dentista.getCpf().equals(dentistaDTO.getCpf())) {
+            if (!dentistaDTO.getCpf().equals(dentista.getCpf()) && dentistaRepository.existsByCpf(dentistaDTO.getCpf())) {
                 throw new RuntimeException("Já existe um dentista com este CPF");
             }
         }
@@ -49,9 +51,11 @@ public class DentistaService {
         dentista.setDataContratacao(dentistaDTO.getDataContratacao());
 
         if (dentistaDTO.getClinicaCnpj() != null) {
-            Clinica clinica = clinicaRepository.findByCnpj(dentistaDTO.getClinicaCnpj())
-                    .orElseThrow(() -> new RuntimeException("Clinica não encontrada com cnpj: " + dentistaDTO.getClinicaCnpj()));
-            dentista.setClinica(clinica);
+            boolean clinicaExiste = clinicaRepository.existsByCnpj(dentistaDTO.getClinicaCnpj());
+            if (!clinicaExiste) {
+                throw new RuntimeException("Clinica não encontrada com cnpj: " + dentistaDTO.getClinicaCnpj());
+            }
+            dentista.setClinicaCnpj(dentistaDTO.getClinicaCnpj());
         }
 
         Endereco endereco = enderecoService.toEntity(dentistaDTO.getEndereco());
@@ -62,8 +66,8 @@ public class DentistaService {
 
         dentista = dentistaRepository.save(dentista);
         return toDto(dentista);
-
     }
+
 
     public List<DentistaDTO> findAll() {
         List<Dentista> dentistas = dentistaRepository.findAll();
@@ -71,11 +75,11 @@ public class DentistaService {
         return dtos;
     }
 
-    public void deleteById(Long id) {
+    public void deleteById(String id) {
         dentistaRepository.deleteById(id);
     }
 
-    public DentistaDTO findById(Long id) {
+    public DentistaDTO findById(String id) {
         Optional<Dentista> byId = dentistaRepository.findById(id);
         if (byId.isPresent()) {
             return toDto(byId.get());
@@ -93,13 +97,11 @@ public class DentistaService {
         dentistaDTO.setEspecialidade(dentista.getEspecialidade());
         dentistaDTO.setEmail(dentista.getEmail());
         dentistaDTO.setDataContratacao(dentista.getDataContratacao());
+        dentistaDTO.setClinicaCnpj(dentista.getClinicaCnpj());
 
-        dentistaDTO.setEndereco(EnderecoService.toDto(dentista.getEndereco()));
+        dentistaDTO.setEndereco(enderecoService.toDto(dentista.getEndereco()));
         dentistaDTO.setTelefone(telefoneService.toDto(dentista.getTelefone()));
 
-        if (dentista.getClinica() != null) {
-            dentistaDTO.setClinicaCnpj(dentista.getClinica().getCnpj());
-        }
 
         return dentistaDTO;
     }

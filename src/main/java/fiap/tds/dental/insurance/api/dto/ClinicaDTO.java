@@ -1,5 +1,7 @@
 package fiap.tds.dental.insurance.api.dto;
 
+import jakarta.persistence.Id;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
@@ -9,7 +11,8 @@ import lombok.Data;
 @Data
 public class ClinicaDTO {
 
-    private Long id;
+    @Id
+    private String id;
 
     @Pattern(regexp = "([0-9]{2}[\\.]?[0-9]{3}[\\.]?[0-9]{3}[\\/]?[0-9]{4}[-]?[0-9]{2})",
             message = "Use 00.000.000/0000-00 or 00000000000000")
@@ -20,12 +23,15 @@ public class ClinicaDTO {
     @NotNull(message = "O nome não pode ser nulo")
     private String nome;
 
-    @NotNull(message = "O id do usuário não pode ser nulo")
+    @NotNull(message = "O usuário não pode ser nulo")
+    @Valid
     private UsuarioDTO usuario;
 
-    @NotNull(message = "O id do endereço não pode ser nulo")
+    @NotNull(message = "O endereço não pode ser nulo")
+    @Valid
     private EnderecoDTO endereco;
 
-    @NotNull(message = "O id do telefone não pode ser nulo")
+    @NotNull(message = "O telefone não pode ser nulo")
+    @Valid
     private TelefoneDTO telefone;
 }

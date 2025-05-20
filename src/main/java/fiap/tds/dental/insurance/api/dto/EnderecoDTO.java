@@ -9,7 +9,7 @@ import lombok.Data;
 
 @Data
 public class EnderecoDTO {
-    private Long id;
+    private String id;
 
     @Size(min = 5, message = "A rua deve ter pelo menos 5 caracteres")
     @NotBlank(message = "A rua não pode ser vazia")

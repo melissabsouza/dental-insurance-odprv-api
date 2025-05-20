@@ -55,14 +55,14 @@ public class AtendimentoController {
     }
 
     @GetMapping("/editar/{id}")
-    public String editarAtendimento(@PathVariable Long id, Model model) {
+    public String editarAtendimento(@PathVariable String id, Model model) {
         AtendimentoDTO atendimentoDTO = atendimentoService.findById(id);
         model.addAttribute("atendimento", atendimentoDTO);
         return "atendimentos/formulario";
     }
 
     @GetMapping("/deletar/{id}")
-    public String deletarAtendimento(@PathVariable Long id, Model model) {
+    public String deletarAtendimento(@PathVariable String id, Model model) {
         atendimentoService.deleteById(id);
         return "redirect:/atendimentos";
     }
