@@ -4,7 +4,7 @@
 
 A API Dental Insurance gerencia dados de clínicas odontológicas, pacientes, dentistas e atendimentos, servindo como base para um aplicativo móvel de armazenamento de informações sobre sinistros odontológicos. Ela permite operações CRUD para essas entidades, oferecendo um maior controle para administração dos dados. Essas informações serão usadas para rastrear sinistros relacionados aos atendimentos.
 
-O projeto tem funcionalidades de front-end utilizando Thymeleaf. 
+O projeto tem funcionalidades de front-end utilizando Thymeleaf integrado ao MongoDB Atlas. 
 A aplicação é implantada no Azure Web App para ser acessada através de um navegador.
 
 ---
@@ -33,6 +33,7 @@ Usando template do Maven:
 
 Release:
 ![Devops](diagrams/release.png)
+![Devops](diagrams/img.png)
 
 ---
 
