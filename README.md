@@ -10,7 +10,7 @@ A aplicação é implantada no Azure Web App para ser acessada através de um na
 ---
 
 ### Vídeo
-. . .
+https://www.youtube.com/watch?v=pt3rRMNS7k8
 
 ---
 ### URL DO WEBAPP
