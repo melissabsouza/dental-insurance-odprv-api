@@ -8,11 +8,6 @@ O projeto tem funcionalidades de front-end utilizando Thymeleaf integrado ao Mon
 A aplicação é implantada no Azure Web App para ser acessada através de um navegador.
 
 ---
-
-### Vídeo
-https://www.youtube.com/watch?v=pt3rRMNS7k8
-
----
 ### URL DO WEBAPP
 
 https://dental-insurance.azurewebsites.net/
